@@ -4,7 +4,7 @@ import {
   createStackNavigator,
   CardStyleInterpolators,
 } from '@react-navigation/stack';
-import {TestScreen} from '../screens';
+import {TestScreen, ProductDetailScreen} from '../screens';
 // import AsyncStorage from '@react-native-community/async-storage';
 import colors from '../utils/colors';
 import {SafeAreaView, StyleSheet} from 'react-native';
@@ -45,6 +45,10 @@ const AppStack = () => {
             contentStyle: {backgroundColor: colors.white},
           }}>
           <Stack.Screen name="test-screen" component={TestScreen} />
+          <Stack.Screen
+            name="product-detail-screen"
+            component={ProductDetailScreen}
+          />
           {/* {isSplash && <Stack.Screen name="test-screen" component={TestScreen} />} */}
           {/* {!onBoard && <Stack.Screen name="test-screen" component={TestScreen} />} */}
         </Stack.Navigator>
