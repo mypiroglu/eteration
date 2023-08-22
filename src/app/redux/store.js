@@ -4,7 +4,7 @@ import {
   getDefaultMiddleware,
 } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
-import {initialSlice} from './slice';
+
 const reducer = combineReducers({});
 export const store = configureStore({
   reducer,
