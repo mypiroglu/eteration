@@ -6,7 +6,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {getData} from '../../api';
 import colors from '../../utils/colors';
 
-export const TestScreen = () => {
+export const BasketScreen = () => {
   const dispatch = useDispatch();
   const {data, isLoading, error} = useSelector(state => state.products);
   useEffect(() => {
@@ -30,7 +30,7 @@ export const TestScreen = () => {
     </View>
   ) : (
     <View style={styles.container}>
-      <Header title="Test Screen" />
+      <Header title="Basket Screen" />
       <View style={styles.productsContainer}>
         <FlatList
           showsVerticalScrollIndicator={false}

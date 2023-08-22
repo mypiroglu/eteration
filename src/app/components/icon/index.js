@@ -3,6 +3,7 @@ import {
   Basket,
   Home,
   Star,
+  UnStar,
   User,
   Search,
   EyeOff,
@@ -17,6 +18,7 @@ const iconTypes = {
   Search,
   EyeOff,
   Eye,
+  UnStar,
 };
 
 export const Icon = ({icon, ...props}) => {

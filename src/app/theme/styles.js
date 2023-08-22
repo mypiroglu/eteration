@@ -4,11 +4,11 @@ import colors from '../utils/colors';
 const globalStyles = StyleSheet.create({
   shadow: {
     shadowOffset: {
-      width: 2,
+      width: 1,
       height: 3,
     },
-    shadowOpacity: 0.3,
-    shadowRadius: 5,
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
     elevation: 5,
     shadowColor: colors.black,
   },

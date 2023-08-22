@@ -8,6 +8,8 @@ export default StyleSheet.create({
     backgroundColor: colors.blue, // Özelleştirilebilir
     padding: 10,
     borderRadius: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   text: {
     color: colors.white, // Özelleştirilebilir

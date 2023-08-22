@@ -5,6 +5,7 @@ import {
   CardStyleInterpolators,
 } from '@react-navigation/stack';
 import {TestScreen, ProductDetailScreen} from '../screens';
+import MyTabs from './bottom-tab';
 // import AsyncStorage from '@react-native-community/async-storage';
 import colors from '../utils/colors';
 import {SafeAreaView, StyleSheet} from 'react-native';
@@ -34,26 +35,24 @@ const AppStack = () => {
   }, 2000);
 
   return (
-    <SafeAreaView style={style.root}>
-      <NavigationContainer>
-        <Stack.Navigator
-          screenOptions={{
-            gestureEnabled: false,
-            cardStyleInterpolator:
-              CardStyleInterpolators.forFadeFromBottomAndroid,
-            headerShown: false,
-            contentStyle: {backgroundColor: colors.white},
-          }}>
-          <Stack.Screen name="test-screen" component={TestScreen} />
-          <Stack.Screen
-            name="product-detail-screen"
-            component={ProductDetailScreen}
-          />
-          {/* {isSplash && <Stack.Screen name="test-screen" component={TestScreen} />} */}
-          {/* {!onBoard && <Stack.Screen name="test-screen" component={TestScreen} />} */}
-        </Stack.Navigator>
-      </NavigationContainer>
-    </SafeAreaView>
+    <NavigationContainer>
+      <Stack.Navigator
+        screenOptions={{
+          gestureEnabled: false,
+          cardStyleInterpolator:
+            CardStyleInterpolators.forFadeFromBottomAndroid,
+          headerShown: false,
+          contentStyle: {backgroundColor: colors.white},
+        }}>
+        <Stack.Screen name="bottom-tab" component={MyTabs} />
+        <Stack.Screen
+          name="product-detail-screen"
+          component={ProductDetailScreen}
+        />
+        {/* {isSplash && <Stack.Screen name="test-screen" component={TestScreen} />} */}
+        {/* {!onBoard && <Stack.Screen name="test-screen" component={TestScreen} />} */}
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 const style = StyleSheet.create({
