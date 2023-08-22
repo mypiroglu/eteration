@@ -18,8 +18,12 @@ export const Header = ({
   style,
 }) => {
   return (
-    <View style={[styles.header, style]}>
-      <Text style={styles.titleText}>{title}</Text>
+    <View
+      style={
+        leftIcon
+          ? [styles.header, style, {justifyContent: 'center'}]
+          : [styles.header, style]
+      }>
       {leftIcon && (
         <HeaderIcon
           icon={leftIcon}
@@ -27,6 +31,8 @@ export const Header = ({
           onPress={onLeftPress}
         />
       )}
+      <Text style={styles.titleText}>{title}</Text>
+
       {rightIcon && (
         <HeaderIcon
           icon={rightIcon}

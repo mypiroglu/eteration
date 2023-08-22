@@ -6,4 +6,6 @@ import Star from './star.svg';
 import Search from './Search.svg';
 import EyeOff from './CloseEye.svg';
 import Eye from './OpenEye.svg';
-export {Basket, Home, Star, User, Search, EyeOff, Eye, UnStar};
+import Back from './Back.svg';
+
+export {Basket, Home, Star, User, Search, EyeOff, Eye, UnStar, Back};

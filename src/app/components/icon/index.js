@@ -8,6 +8,7 @@ import {
   Search,
   EyeOff,
   Eye,
+  Back,
 } from '../../../assets/svg';
 
 const iconTypes = {
@@ -19,6 +20,7 @@ const iconTypes = {
   EyeOff,
   Eye,
   UnStar,
+  Back,
 };
 
 export const Icon = ({icon, ...props}) => {

@@ -10,7 +10,7 @@ export const ProductCard = ({item}) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const navigation = useNavigation();
   const onHandlePress = () => {
-    navigation.navigate('product-detail-screen', {item});
+    navigation.navigate('product-detail-screen', {item: item});
   };
   const onHandlePressIcon = () => {
     console.log('icon');
