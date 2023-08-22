@@ -56,7 +56,12 @@ export default StyleSheet.create({
     width: '40%',
     height: 40,
     backgroundColor: colors.blue,
-    borderRadius: sizing.radius,
+  },
+  buttonAdd: {
+    width: '100%',
+    height: 40,
+    backgroundColor: colors.blue,
+    marginTop: sizing.padding,
   },
   icon: {
     fontSize: sizing.subtitle,

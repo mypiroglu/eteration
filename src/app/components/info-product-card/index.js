@@ -4,7 +4,7 @@ import {Text, Button} from '..';
 import styles from './style';
 import {useNavigation} from '@react-navigation/native';
 
-export const InfoProductCard = ({item}) => {
+export const InfoProductCard = ({item, preset = 'primary'}) => {
   const {price, brand, image, description} = item;
   const [count, setCount] = useState(0);
   const navigation = useNavigation();
@@ -12,6 +12,9 @@ export const InfoProductCard = ({item}) => {
     navigation.navigate('product-detail-screen', {item: item});
   };
 
+  const onHandlePressAddToBasket = () => {
+    // Burada sepete ekleme işlemi yapılacak. Sonra redux'a taşınacak. ASYNC STORAGE KULLANILACAK.
+  };
   const onHandlePressIncrease = () => {
     setCount(count + 1);
 
@@ -40,19 +43,27 @@ export const InfoProductCard = ({item}) => {
             {description}
           </Text>
         </View>
-        <View style={styles.infoButton}>
+        {preset === 'primary' ? (
+          <View style={styles.infoButton}>
+            <Button
+              onPress={onHandlePressDecrease}
+              title="-"
+              style={styles.button}
+            />
+            <Text>{count}</Text>
+            <Button
+              onPress={onHandlePressIncrease}
+              title="+"
+              style={styles.button}
+            />
+          </View>
+        ) : (
           <Button
-            onPress={onHandlePressDecrease}
-            title="-"
-            style={styles.button}
+            title="Add to Basket"
+            onPress={onHandlePressAddToBasket}
+            style={styles.buttonAdd}
           />
-          <Text>{count}</Text>
-          <Button
-            onPress={onHandlePressIncrease}
-            title="+"
-            style={styles.button}
-          />
-        </View>
+        )}
       </View>
     </View>
   );

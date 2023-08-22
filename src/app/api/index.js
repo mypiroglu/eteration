@@ -17,7 +17,7 @@ axios
     console.log(response.data);
   })
   .catch(error => {
-    console.error('Veri çekme hatası:', error);
+    console.error('Error :', error);
   });
 
 export const getData = createAsyncThunk('products', async () => {

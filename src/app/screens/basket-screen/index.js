@@ -1,7 +1,12 @@
 import React, {useEffect} from 'react';
 import {View, ActivityIndicator, FlatList} from 'react-native';
 import styles from './style';
-import {Header, ProductCard, InfoProductCard} from '../../components';
+import {
+  Header,
+  ProductCard,
+  InfoProductCard,
+  BottomCard,
+} from '../../components';
 
 export const BasketScreen = () => {
   const data = [
@@ -34,7 +39,9 @@ export const BasketScreen = () => {
       <Header title="Basket Screen" />
       <View style={styles.productsContainer}>
         <InfoProductCard item={data[0]} />
+        <InfoProductCard item={data[0]} preset="secondary" />
       </View>
+      <BottomCard price={data[0].price} title={'Complete'} />
     </View>
   );
 };

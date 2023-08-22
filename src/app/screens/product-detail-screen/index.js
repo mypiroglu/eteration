@@ -7,7 +7,7 @@ import {
   ScrollView,
   Pressable,
 } from 'react-native';
-import {Button, Header, Icon} from '../../components';
+import {Button, Header, Icon, BottomCard} from '../../components';
 import {useNavigation} from '@react-navigation/native';
 import styles from './style';
 
@@ -52,14 +52,7 @@ export const ProductDetailScreen = ({route}) => {
           <Text style={styles.description}>{item.description}</Text>
         </View>
       </ScrollView>
-      <View style={styles.bottomContainer}>
-        <View>
-          <Text style={styles.priceText}>Price:</Text>
-          <Text style={styles.priceNumber}>{item.price} ₺</Text>
-        </View>
-        <Button title={'Add to cart'} />
-        {/* burada sepete eklenecek */}
-      </View>
+      <BottomCard price={item.price} style={styles.bottomContainer} />
     </SafeAreaView>
   );
 };
