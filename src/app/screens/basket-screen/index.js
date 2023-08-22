@@ -39,9 +39,9 @@ export const BasketScreen = () => {
       <Header title="Basket Screen" />
       <View style={styles.productsContainer}>
         <InfoProductCard item={data[0]} />
-        <InfoProductCard item={data[0]} preset="secondary" />
+        <InfoProductCard item={data[1]} />
       </View>
-      <BottomCard price={data[0].price} title={'Complete'} />
+      <BottomCard price={data[0].price + data[1].price} title={'Complete'} />
     </View>
   );
 };

@@ -1,13 +1,46 @@
-import React from 'react';
-import {View, ImageBackground, ScrollView} from 'react-native';
-import {Text, Button} from '../../components';
-import {useNavigation} from '@react-navigation/native';
+import React, {useEffect} from 'react';
+import {View, ActivityIndicator, FlatList} from 'react-native';
 import styles from './style';
+import {
+  Header,
+  ProductCard,
+  InfoProductCard,
+  BottomCard,
+} from '../../components';
+
 export const FavoriteScreen = () => {
-  const navigation = useNavigation();
+  const data = [
+    {
+      id: 1,
+      brand: 'Apple',
+      price: 10000,
+      description: 'Iphone 12 Pro Max',
+      image:
+        'https://www.technopat.net/sosyal/eklenti/iphone-12-pro-max-ozellikleri-ve-fiyati.138785/',
+    },
+    {
+      id: 2,
+      brand: 'Samsung',
+      price: 8000,
+      description: 'Samsung Galaxy S21 Ultra',
+      image:
+        'https://www.technopat.net/sosyal/eklenti/samsung-galaxy-s21-ultra-ozellikleri-ve-fiyati.138786/',
+    },
+  ];
+  const RenderItem = ({item}) => {
+    return (
+      <View style={styles.itemContainer}>
+        <ProductCard item={item} />
+      </View>
+    );
+  };
   return (
-    <ScrollView style={styles.root} showsVerticalScrollIndicator={false}>
-      <Text>Fovorite</Text>
-    </ScrollView>
+    <View style={styles.container}>
+      <Header title="Favorite Screen" />
+      <View style={styles.productsContainer}>
+        <InfoProductCard item={data[0]} preset="secondary" />
+        <InfoProductCard item={data[1]} preset="secondary" />
+      </View>
+    </View>
   );
 };

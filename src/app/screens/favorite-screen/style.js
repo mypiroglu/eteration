@@ -1,37 +1,23 @@
 import {StyleSheet} from 'react-native';
+import colors from '../../utils/colors';
 import sizing from '../../theme/sizing';
 export default StyleSheet.create({
-  root: {
-    flexGrow: 1,
-    paddingBottom: sizing.componentHeight * 2,
+  container: {
+    flex: 1,
+    backgroundColor: colors.white,
   },
-  imageBackground: {
-    width: sizing.width,
-    height: 250,
+  indicatorContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  image: {
-    width: sizing.width,
-    height: 250,
-    borderBottomLeftRadius: 40,
-    borderBottomRightRadius: 40,
+  itemContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  changeInfoButton: {
-    marginTop: -sizing.marginHorizontal * 3,
-    fontWeight: '200',
-  },
-  changeInfoText: {
-    fontWeight: '400',
-  },
-  name: {
-    fontSize: sizing.title,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    marginTop: sizing.marginHorizontal * 2,
-    marginBottom: 40,
-  },
-  content: {
+  productsContainer: {
     flex: 1,
     paddingHorizontal: sizing.padding,
-    marginBottom: sizing.componentHeight * 2,
   },
 });

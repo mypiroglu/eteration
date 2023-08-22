@@ -27,19 +27,19 @@ export const InfoProductCard = ({item, preset = 'primary'}) => {
     // Burada sepete ekleme işlemi yapılacak. Sonra redux'a taşınacak. ASYNC STORAGE KULLANILACAK.
   };
   return (
-    <View style={styles.container}>
+    <Pressable style={styles.container} onPress={onHandlePress}>
       <Pressable style={styles.imageContainer} onPress={onHandlePress}>
         <Image source={{uri: image}} style={styles.image} />
       </Pressable>
       <View style={styles.infoContainer}>
         <View style={styles.info}>
-          <Text numberOfLines={2} style={styles.brand}>
+          <Text numberOfLines={1} style={styles.brand}>
             {brand}
           </Text>
           <Text style={styles.price}>{price} TL</Text>
         </View>
         <View style={styles.info}>
-          <Text numberOfLines={2} style={styles.description}>
+          <Text numberOfLines={1} style={styles.description}>
             {description}
           </Text>
         </View>
@@ -65,6 +65,6 @@ export const InfoProductCard = ({item, preset = 'primary'}) => {
           />
         )}
       </View>
-    </View>
+    </Pressable>
   );
 };
