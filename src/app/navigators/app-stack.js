@@ -10,6 +10,7 @@ import colors from '../utils/colors';
 import {SafeAreaView, StyleSheet} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import {addToBasketInitial} from '../redux/slice/basket-slice';
+import {addToFavoritesInitial} from '../redux/slice/favorites-slice';
 import {useDispatch} from 'react-redux';
 const AppStack = () => {
   const [onBoard, setOnBoard] = useState(false);
@@ -17,7 +18,7 @@ const AppStack = () => {
   const [isFirstLoad, setIsFirstLoad] = useState(true);
   // AsyncStorage.removeItem('basket');
   isFirstLoad &&
-    AsyncStorage.getItem('basket')
+    (AsyncStorage.getItem('basket')
       .then(res => {
         if (res) {
           setIsFirstLoad(false);
@@ -36,7 +37,25 @@ const AppStack = () => {
       })
       .catch(error => {
         console.error('Veri getirilirken bir hata oluştu:', error);
-      });
+      }),
+    AsyncStorage.getItem('favorites')
+      .then(res => {
+        if (res) {
+          setIsFirstLoad(false);
+          const parsedData = JSON.parse(res);
+          // console.log('parsedData', typeof parsedData);
+          parsedData.map(data => {
+            console.log('data', typeof data);
+            dispatch(addToFavoritesInitial(data));
+          });
+        } else {
+          console.log('Veri bulunamadı.');
+        }
+      })
+      .catch(error => {
+        console.error('Veri getirilirken bir hata oluştu:', error);
+      }));
+
   const [isSplash, setIsSplash] = useState(true);
   const Stack = createStackNavigator();
 

@@ -6,6 +6,7 @@ import {
   Image,
   ScrollView,
   Pressable,
+  Alert,
 } from 'react-native';
 import {Button, Header, Icon, BottomCard} from '../../components';
 import {useNavigation} from '@react-navigation/native';
@@ -39,6 +40,9 @@ export const ProductDetailScreen = ({route}) => {
     // Burada sepete ekleme işlemi yapılacak. Sonra redux'a taşınacak. ASYNC STORAGE KULLANILACAK.
     const quantity = 1;
     dispatch(addToBasket({item: item, quantity: quantity}));
+    Alert.alert('Notification', 'Added to Basket ', [
+      {text: 'OK', onPress: null},
+    ]);
   };
   useEffect(() => {
     const favoriteState = favorites.find(favorite => favorite.id === item.id);
