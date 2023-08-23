@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -11,15 +11,23 @@ import {Button, Header, Icon, BottomCard} from '../../components';
 import {useNavigation} from '@react-navigation/native';
 import styles from './style';
 import {addToBasket} from '../../redux/slice/basket-slice';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import {
+  addToFavorites,
+  removeFromFavorites,
+} from '../../redux/slice/favorites-slice';
 
 export const ProductDetailScreen = ({route}) => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const {item} = route.params;
   const [isFavorite, setIsFavorite] = useState(false);
+  const {favorites} = useSelector(state => state.favorites);
+
   const onHandlePressIcon = () => {
-    console.log('icon');
+    isFavorite
+      ? dispatch(removeFromFavorites(item))
+      : dispatch(addToFavorites(item));
     setIsFavorite(!isFavorite);
     // Burada favoriye ekleme işlemi yapılacak. Sonra redux'a taşınacak. ASYNC STORAGE KULLANILACAK.
   };
@@ -29,10 +37,20 @@ export const ProductDetailScreen = ({route}) => {
   console.log('item', item);
   const onHandlePressAddToBasket = () => {
     // Burada sepete ekleme işlemi yapılacak. Sonra redux'a taşınacak. ASYNC STORAGE KULLANILACAK.
-    console.log('button31');
     const quantity = 1;
     dispatch(addToBasket({item: item, quantity: quantity}));
   };
+  useEffect(() => {
+    const favoriteState = favorites.find(favorite => favorite.id === item.id);
+    if (favoriteState) {
+      setIsFavorite(true);
+    } else {
+      setIsFavorite(false);
+    }
+  }, [item]);
+  useEffect(() => {
+    console.log('item', item.description);
+  }, [item]);
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView
@@ -54,12 +72,14 @@ export const ProductDetailScreen = ({route}) => {
             />
           </Pressable>
           <Image style={styles.image} source={{uri: item.image}} />
-          <Text style={styles.title}>
-            <Text>{item.brand} </Text>
-            <Text>{item.name}</Text>
-          </Text>
-          <Text style={styles.description}>{item.description}</Text>
         </View>
+        <Text style={styles.title}>
+          <Text>{item.brand} </Text>
+          <Text>{item.name}</Text>
+        </Text>
+        <Text style={styles.description}>
+          {item.description}asdasdasdasdasd
+        </Text>
       </ScrollView>
       <BottomCard
         price={item.price}

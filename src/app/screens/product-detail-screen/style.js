@@ -5,13 +5,12 @@ export default StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.white,
-    padding: sizing.padding,
-    paddingHorizontal: sizing.padding,
     alignItems: 'center',
   },
   imageContainer: {
     width: sizing.width - sizing.padding * 2,
     height: 300,
+    marginHorizontal: sizing.padding,
   },
   image: {
     width: '100%',
@@ -22,6 +21,7 @@ export default StyleSheet.create({
     fontSize: sizing.title,
     fontWeight: 'bold',
     color: colors.black,
+    marginHorizontal: sizing.padding,
   },
   description: {
     fontSize: sizing.body,
@@ -29,6 +29,7 @@ export default StyleSheet.create({
     fontWeight: '300',
     textAlign: 'justify',
     lineHeight: 20,
+    marginHorizontal: sizing.padding,
   },
   icon: {
     position: 'absolute',
@@ -52,11 +53,8 @@ export default StyleSheet.create({
   },
   scrollContainer: {
     flexGrow: 1,
-    padding: sizing.padding,
-    paddingHorizontal: sizing.padding,
   },
   header: {
     width: sizing.width,
-    marginLeft: -sizing.padding,
   },
 });

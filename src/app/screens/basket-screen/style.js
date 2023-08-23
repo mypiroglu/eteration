@@ -19,6 +19,6 @@ export default StyleSheet.create({
   productsContainer: {
     flex: 1,
     paddingHorizontal: sizing.padding,
-    marginBottom: Platform.OS === 'ios' ? 75 : 45,
+    marginBottom: Platform.OS === 'ios' ? 75 : 85,
   },
 });

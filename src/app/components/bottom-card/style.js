@@ -11,7 +11,7 @@ export default StyleSheet.create({
     alignItems: 'center',
     marginTop: sizing.margin,
     position: 'relative',
-    bottom: Platform.OS === 'ios' ? 75 : 45,
+    bottom: Platform.OS === 'ios' ? 75 : 85,
     left: 0,
     right: 0,
     padding: sizing.padding,

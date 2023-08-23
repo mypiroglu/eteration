@@ -5,7 +5,7 @@ import globalStyles from '../../theme/styles';
 export default StyleSheet.create({
   root: {
     width: (sizing.width - sizing.padding * 4) / 2,
-    height: sizing.height / 2.7,
+    height: sizing.height / 2.5,
     padding: sizing.padding,
     borderRadius: sizing.radius,
     borderTopRightRadius: 0,

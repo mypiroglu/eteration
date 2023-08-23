@@ -20,7 +20,6 @@ export const InfoProductCard = ({data, preset = 'primary'}) => {
 
   const onHandlePressAddToBasket = () => {
     // Burada sepete ekleme işlemi yapılacak. Sonra redux'a taşınacak. ASYNC STORAGE KULLANILACAK.
-    console.log('button31');
     const quantity = 1;
     dispatch(addToBasket({item: item, quantity: quantity}));
   };
@@ -30,7 +29,7 @@ export const InfoProductCard = ({data, preset = 'primary'}) => {
     // Burada sepete ekleme işlemi yapılacak. Sonra redux'a taşınacak. ASYNC STORAGE KULLANILACAK.
   };
   const onHandlePressDecrease = () => {
-    if (count > 0) {
+    if (quantity > 0) {
       setCount(count - 1);
       dispatch(minusOne(item));
     }
