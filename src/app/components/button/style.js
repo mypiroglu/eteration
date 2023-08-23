@@ -1,7 +1,5 @@
 import {StyleSheet} from 'react-native';
 import colors from '../../utils/colors';
-import sizing from '../../theme/sizing';
-import globalStyles from '../../theme/styles';
 
 export default StyleSheet.create({
   button: {
