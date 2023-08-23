@@ -5,9 +5,11 @@ import {
 } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
 
-import {productSlice} from './slice';
+import {productSlice, favoritesSlice, basketSlice} from './slice';
 const reducer = combineReducers({
   products: productSlice,
+  favorites: favoritesSlice,
+  basket: basketSlice,
 });
 export const store = configureStore({
   reducer,

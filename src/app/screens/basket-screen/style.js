@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Platform} from 'react-native';
 import colors from '../../utils/colors';
 import sizing from '../../theme/sizing';
 export default StyleSheet.create({
@@ -19,5 +19,6 @@ export default StyleSheet.create({
   productsContainer: {
     flex: 1,
     paddingHorizontal: sizing.padding,
+    marginBottom: Platform.OS === 'ios' ? 75 : 45,
   },
 });

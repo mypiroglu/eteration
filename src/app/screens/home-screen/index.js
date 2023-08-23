@@ -27,7 +27,7 @@ export const HomeScreen = () => {
     </View>
   ) : (
     <View style={styles.container}>
-      <Header title="Test Screen" />
+      <Header title="Home Screen" />
       <View style={styles.productsContainer}>
         <FlatList
           showsVerticalScrollIndicator={false}

@@ -7,8 +7,10 @@ import {
   InfoProductCard,
   BottomCard,
 } from '../../components';
+import {useSelector} from 'react-redux';
 
 export const BasketScreen = () => {
+  const {basket} = useSelector(state => state.basket);
   const data = [
     {
       id: 1,
@@ -30,16 +32,23 @@ export const BasketScreen = () => {
   const RenderItem = ({item}) => {
     return (
       <View style={styles.itemContainer}>
-        <ProductCard item={item} />
+        <InfoProductCard data={item} />
       </View>
     );
   };
+  useEffect(() => {
+    console.log('basketttt', basket);
+  }, [basket]);
   return (
     <View style={styles.container}>
       <Header title="Basket Screen" />
       <View style={styles.productsContainer}>
-        <InfoProductCard item={data[0]} />
-        <InfoProductCard item={data[1]} />
+        <FlatList
+          showsVerticalScrollIndicator={false}
+          data={basket}
+          renderItem={RenderItem}
+          keyExtractor={(item, index) => index}
+        />
       </View>
       <BottomCard price={data[0].price + data[1].price} title={'Complete'} />
     </View>

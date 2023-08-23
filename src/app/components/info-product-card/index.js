@@ -4,9 +4,12 @@ import {Text, Button} from '..';
 import styles from './style';
 import {useNavigation} from '@react-navigation/native';
 
-export const InfoProductCard = ({item, preset = 'primary'}) => {
-  const {price, brand, image, description} = item;
-  const [count, setCount] = useState(0);
+export const InfoProductCard = ({data, preset = 'primary'}) => {
+  const {item, quantity} = data;
+  let {brand, price, image, description} = item;
+  console.log('item', item);
+
+  const [count, setCount] = useState(1);
   const navigation = useNavigation();
   const onHandlePress = () => {
     navigation.navigate('product-detail-screen', {item: item});
@@ -50,7 +53,7 @@ export const InfoProductCard = ({item, preset = 'primary'}) => {
               title="-"
               style={styles.button}
             />
-            <Text>{count}</Text>
+            <Text>{quantity}</Text>
             <Button
               onPress={onHandlePressIncrease}
               title="+"

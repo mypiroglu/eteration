@@ -1,26 +1,46 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, Image, Pressable} from 'react-native';
 import {Text, Button, Icon} from '..';
 import styles from './style';
 import {useNavigation} from '@react-navigation/native';
-import colors from '../../utils/colors';
+import {
+  addToFavorites,
+  removeFromFavorites,
+} from '../../redux/slice/favorites-slice';
+import {addToBasket, removeFromBasket} from '../../redux/slice/basket-slice';
+import {useDispatch, useSelector} from 'react-redux';
 
 export const ProductCard = ({item}) => {
+  const dispatch = useDispatch();
   const {price, brand, image, description} = item;
   const [isFavorite, setIsFavorite] = useState(false);
   const navigation = useNavigation();
+  const {favorites} = useSelector(state => state.favorites);
   const onHandlePress = () => {
     navigation.navigate('product-detail-screen', {item: item});
   };
+
   const onHandlePressIcon = () => {
-    console.log('icon');
+    isFavorite
+      ? dispatch(removeFromFavorites(item))
+      : dispatch(addToFavorites(item));
     setIsFavorite(!isFavorite);
     // Burada favoriye ekleme işlemi yapılacak. Sonra redux'a taşınacak. ASYNC STORAGE KULLANILACAK.
   };
   const onHandlePressButton = () => {
     console.log('button');
+    const quantity = 1;
+    dispatch(addToBasket({item: item, quantity}));
     // Burada sepete ekleme işlemi yapılacak. Sonra redux'a taşınacak. ASYNC STORAGE KULLANILACAK.
   };
+  useEffect(() => {
+    const favoriteState = favorites.find(favorite => favorite.id === item.id);
+    if (favoriteState) {
+      setIsFavorite(true);
+    } else {
+      setIsFavorite(false);
+    }
+  }, [item]);
   return (
     <Pressable style={styles.root} onPress={onHandlePress}>
       <>

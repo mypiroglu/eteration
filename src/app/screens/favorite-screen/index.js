@@ -1,45 +1,28 @@
 import React, {useEffect} from 'react';
-import {View, ActivityIndicator, FlatList} from 'react-native';
+import {View, FlatList} from 'react-native';
 import styles from './style';
-import {
-  Header,
-  ProductCard,
-  InfoProductCard,
-  BottomCard,
-} from '../../components';
+import {Header, InfoProductCard} from '../../components';
+import {useSelector} from 'react-redux';
 
 export const FavoriteScreen = () => {
-  const data = [
-    {
-      id: 1,
-      brand: 'Apple',
-      price: 10000,
-      description: 'Iphone 12 Pro Max',
-      image:
-        'https://www.technopat.net/sosyal/eklenti/iphone-12-pro-max-ozellikleri-ve-fiyati.138785/',
-    },
-    {
-      id: 2,
-      brand: 'Samsung',
-      price: 8000,
-      description: 'Samsung Galaxy S21 Ultra',
-      image:
-        'https://www.technopat.net/sosyal/eklenti/samsung-galaxy-s21-ultra-ozellikleri-ve-fiyati.138786/',
-    },
-  ];
-  const RenderItem = ({item}) => {
-    return (
-      <View style={styles.itemContainer}>
-        <ProductCard item={item} />
-      </View>
-    );
+  const {favorites} = useSelector(state => state.favorites);
+
+  const RenderItem = item => {
+    return <InfoProductCard data={item} preset="secondary" />;
   };
+  useEffect(() => {
+    console.log('favorites', favorites);
+  }, [favorites]);
   return (
     <View style={styles.container}>
       <Header title="Favorite Screen" />
       <View style={styles.productsContainer}>
-        <InfoProductCard item={data[0]} preset="secondary" />
-        <InfoProductCard item={data[1]} preset="secondary" />
+        <FlatList
+          showsVerticalScrollIndicator={false}
+          data={favorites}
+          renderItem={RenderItem}
+          keyExtractor={(item, index) => index}
+        />
       </View>
     </View>
   );
