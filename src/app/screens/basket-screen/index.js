@@ -11,24 +11,11 @@ import {useSelector} from 'react-redux';
 
 export const BasketScreen = () => {
   const {basket} = useSelector(state => state.basket);
-  const data = [
-    {
-      id: 1,
-      brand: 'Apple',
-      price: 10000,
-      description: 'Iphone 12 Pro Max',
-      image:
-        'https://www.technopat.net/sosyal/eklenti/iphone-12-pro-max-ozellikleri-ve-fiyati.138785/',
-    },
-    {
-      id: 2,
-      brand: 'Samsung',
-      price: 8000,
-      description: 'Samsung Galaxy S21 Ultra',
-      image:
-        'https://www.technopat.net/sosyal/eklenti/samsung-galaxy-s21-ultra-ozellikleri-ve-fiyati.138786/',
-    },
-  ];
+  console.log('basket', basket);
+  const calculatedPrice = basket.reduce((acc, item) => {
+    return acc + item.item.price * item.quantity;
+  }, 0);
+
   const RenderItem = ({item}) => {
     return (
       <View style={styles.itemContainer}>
@@ -36,9 +23,7 @@ export const BasketScreen = () => {
       </View>
     );
   };
-  useEffect(() => {
-    console.log('basketttt', basket);
-  }, [basket]);
+
   return (
     <View style={styles.container}>
       <Header title="Basket Screen" />
@@ -50,7 +35,7 @@ export const BasketScreen = () => {
           keyExtractor={(item, index) => index}
         />
       </View>
-      <BottomCard price={data[0].price + data[1].price} title={'Complete'} />
+      <BottomCard price={calculatedPrice} title={'Complete'} />
     </View>
   );
 };
