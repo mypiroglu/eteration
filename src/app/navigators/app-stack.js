@@ -7,7 +7,7 @@ import {
 import {ProductDetailScreen} from '../screens';
 import MyTabs from './bottom-tab';
 import colors from '../utils/colors';
-import {SafeAreaView, StyleSheet} from 'react-native';
+import {StyleSheet} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import {addToBasketInitial} from '../redux/slice/basket-slice';
 import {addToFavoritesInitial} from '../redux/slice/favorites-slice';
@@ -16,7 +16,6 @@ const AppStack = () => {
   const [onBoard, setOnBoard] = useState(false);
   const dispatch = useDispatch();
   const [isFirstLoad, setIsFirstLoad] = useState(true);
-  // AsyncStorage.removeItem('basket');
   isFirstLoad &&
     (AsyncStorage.getItem('basket')
       .then(res => {
@@ -43,7 +42,6 @@ const AppStack = () => {
         if (res) {
           setIsFirstLoad(false);
           const parsedData = JSON.parse(res);
-          // console.log('parsedData', typeof parsedData);
           parsedData.map(data => {
             console.log('data', typeof data);
             dispatch(addToFavoritesInitial(data));

@@ -1,11 +1,16 @@
 import React, {useState} from 'react';
-import {View, Image, Pressable} from 'react-native';
+import {View, Image, Pressable, Alert} from 'react-native';
 import {Text, Button} from '..';
 import styles from './style';
 import {useNavigation} from '@react-navigation/native';
 import {useDispatch} from 'react-redux';
-import {plusOne, minusOne} from '../../redux/slice/basket-slice';
-import {addToBasket} from '../../redux/slice/basket-slice';
+import {
+  plusOne,
+  minusOne,
+  addToBasket,
+  removeFromBasket,
+} from '../../redux/slice/basket-slice';
+import {removeFromFavorites} from '../../redux/slice/favorites-slice';
 
 export const InfoProductCard = ({data, preset = 'primary'}) => {
   const {item, quantity} = data;
@@ -18,25 +23,47 @@ export const InfoProductCard = ({data, preset = 'primary'}) => {
     navigation.navigate('product-detail-screen', {item: item});
   };
 
+  const onHandleLongPress = () => {
+    Alert.alert(
+      'warning',
+      preset === 'primary'
+        ? 'Remove Item From Basket'
+        : 'Remove Item From Favorite',
+      [
+        {
+          text: 'Cancel',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        },
+        {
+          text: 'OK',
+          onPress: () =>
+            preset === 'primary'
+              ? dispatch(removeFromBasket({item: item}))
+              : dispatch(removeFromFavorites(item)),
+        },
+      ],
+    );
+  };
   const onHandlePressAddToBasket = () => {
-    // Burada sepete ekleme işlemi yapılacak. Sonra redux'a taşınacak. ASYNC STORAGE KULLANILACAK.
     const quantity = 1;
     dispatch(addToBasket({item: item, quantity: quantity}));
   };
   const onHandlePressIncrease = () => {
     setCount(count + 1);
     dispatch(plusOne(item));
-    // Burada sepete ekleme işlemi yapılacak. Sonra redux'a taşınacak. ASYNC STORAGE KULLANILACAK.
   };
   const onHandlePressDecrease = () => {
     if (quantity > 0) {
       setCount(count - 1);
       dispatch(minusOne(item));
     }
-    // Burada sepete ekleme işlemi yapılacak. Sonra redux'a taşınacak. ASYNC STORAGE KULLANILACAK.
   };
   return (
-    <Pressable style={styles.container} onPress={onHandlePress}>
+    <Pressable
+      style={styles.container}
+      onPress={onHandlePress}
+      onLongPress={onHandleLongPress}>
       <Pressable style={styles.imageContainer} onPress={onHandlePress}>
         <Image source={{uri: image}} style={styles.image} />
       </Pressable>

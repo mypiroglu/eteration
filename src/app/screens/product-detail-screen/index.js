@@ -30,14 +30,12 @@ export const ProductDetailScreen = ({route}) => {
       ? dispatch(removeFromFavorites(item))
       : dispatch(addToFavorites(item));
     setIsFavorite(!isFavorite);
-    // Burada favoriye ekleme işlemi yapılacak. Sonra redux'a taşınacak. ASYNC STORAGE KULLANILACAK.
   };
   const onHandlePressBack = () => {
     navigation.goBack();
   };
   console.log('item', item);
   const onHandlePressAddToBasket = () => {
-    // Burada sepete ekleme işlemi yapılacak. Sonra redux'a taşınacak. ASYNC STORAGE KULLANILACAK.
     const quantity = 1;
     dispatch(addToBasket({item: item, quantity: quantity}));
     Alert.alert('Notification', 'Added to Basket ', [

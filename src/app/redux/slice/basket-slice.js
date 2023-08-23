@@ -11,10 +11,8 @@ const basketSlice = createSlice({
       const existingItemIndex = state.basket.findIndex(e => e.id === item.id);
 
       if (existingItemIndex !== -1) {
-        // Ürün sepette zaten varsa sadece adeti arttırın
         state.basket[existingItemIndex].quantity += quantity;
       } else {
-        // Ürün sepette yoksa yeni bir öğe ekleyin
         state.basket.push({item, quantity});
       }
     },
@@ -26,10 +24,8 @@ const basketSlice = createSlice({
       );
 
       if (existingItemIndex !== -1) {
-        // Ürün sepette zaten varsa sadece adeti arttırın
         state.basket[existingItemIndex].quantity += quantity;
       } else {
-        // Ürün sepette yoksa yeni bir öğe ekleyin
         state.basket.push({item, quantity});
       }
       AsyncStorage.removeItem('basket');

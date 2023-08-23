@@ -3,14 +3,14 @@ import colors from '../../utils/colors';
 
 export default StyleSheet.create({
   button: {
-    backgroundColor: colors.blue, // Özelleştirilebilir
+    backgroundColor: colors.blue,
     padding: 10,
     borderRadius: 5,
     justifyContent: 'center',
     alignItems: 'center',
   },
   text: {
-    color: colors.white, // Özelleştirilebilir
+    color: colors.white,
     textAlign: 'center',
     fontWeight: '500',
   },

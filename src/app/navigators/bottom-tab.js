@@ -15,6 +15,9 @@ const MyTabs = () => {
   return (
     <Tab.Navigator
       initialRouteName="home-stack"
+      tabBarOptions={{
+        keyboardHidesTabBar: true,
+      }}
       screenOptions={{
         headerShown: false,
         tabBarActiveTintColor: colors.black,

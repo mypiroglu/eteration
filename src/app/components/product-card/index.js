@@ -25,13 +25,11 @@ export const ProductCard = ({item}) => {
       ? dispatch(removeFromFavorites(item))
       : dispatch(addToFavorites(item));
     setIsFavorite(!isFavorite);
-    // Burada favoriye ekleme işlemi yapılacak. Sonra redux'a taşınacak. ASYNC STORAGE KULLANILACAK.
   };
   const onHandlePressButton = () => {
     console.log('button');
     const quantity = 1;
     dispatch(addToBasket({item: item, quantity}));
-    // Burada sepete ekleme işlemi yapılacak. Sonra redux'a taşınacak. ASYNC STORAGE KULLANILACAK.
   };
   useEffect(() => {
     const favoriteState = favorites.find(favorite => favorite.id === item.id);

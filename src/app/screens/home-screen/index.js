@@ -19,13 +19,17 @@ import {
 import {useDispatch, useSelector} from 'react-redux';
 import {getData} from '../../api';
 import colors from '../../utils/colors';
+import {useFocusEffect} from '@react-navigation/native';
 
 export const HomeScreen = () => {
   const dispatch = useDispatch();
   const {data, isLoading} = useSelector(state => state.products);
   const [searchText, setSearchText] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
-  const [selectedSort, setSelectedSort] = useState();
+  const [selectedSort, setSelectedSort] = useState(1);
+  const [sortedProducts, setSortedProducts] = useState([]);
+  const [showProduct, setShowProduct] = useState(data);
+
   const filteredData =
     searchText !== '' &&
     data.filter(item => {
@@ -44,23 +48,6 @@ export const HomeScreen = () => {
       </View>
     );
   };
-  const RenderBrandList = ({item}) => {
-    return (
-      <View style={styles.radioButtonContainer}>
-        <Text style={styles.radioButtonText}>{item.brand}</Text>
-      </View>
-    );
-  };
-  const RenderModelList = ({item}) => {
-    return (
-      <View style={styles.radioButtonContainer}>
-        <Text style={styles.radioButtonText}>{item.model}</Text>
-      </View>
-    );
-  };
-  useEffect(() => {
-    dispatch(getData());
-  }, []);
   const sortBy = [
     {
       id: 1,
@@ -79,19 +66,71 @@ export const HomeScreen = () => {
       name: 'Price low to high',
     },
   ];
+
+  const RenderBrandList = ({item}) => {
+    return (
+      <View style={styles.radioButtonContainer}>
+        <Text style={styles.radioButtonText}>{item.brand}</Text>
+      </View>
+    );
+  };
+  const RenderModelList = ({item}) => {
+    return (
+      <View style={styles.radioButtonContainer}>
+        <Text style={styles.radioButtonText}>{item.model}</Text>
+      </View>
+    );
+  };
+  useEffect(() => {
+    dispatch(getData());
+  }, []);
+
+  const sortAscending = () => {
+    const sortedProduct = [...data].sort((a, b) => a.price - b.price);
+    setSortedProducts(sortedProduct);
+  };
+
+  const sortDescending = () => {
+    const sortedProduct = [...data].sort((a, b) => b.price - a.price);
+    setSortedProducts(sortedProduct);
+  };
   const RenderSortBy = ({item}) => {
     return (
       <View style={styles.radioButtonContainer}>
         <RadioButton
           setState={setSelectedSort}
           item={item}
-          state={selectedSort?.id === item.id}
+          state={selectedSort === item.id}
         />
         <Text style={styles.radioButtonText}>{item.name}</Text>
       </View>
     );
   };
+  useEffect(() => {
+    switch (selectedSort) {
+      case 1:
+        setShowProduct(data);
+        break;
+      case 2:
+        setShowProduct(data);
+        break;
+      case 3:
+        sortAscending();
+        setShowProduct(sortedProducts);
+        break;
+      case 4:
+        sortDescending();
+        setShowProduct(sortedProducts);
+        break;
+      default:
+        setShowProduct(data);
+        break;
+    }
+  }, [selectedSort, data]);
 
+  useEffect(() => {
+    console.log('showProduct', showProduct);
+  }, [showProduct]);
   return isLoading ? (
     <View style={styles.indicatorContainer}>
       <ActivityIndicator size="large" color={colors.blue} />
@@ -182,7 +221,7 @@ export const HomeScreen = () => {
             <FlatList
               showsVerticalScrollIndicator={false}
               numColumns={2}
-              data={data}
+              data={showProduct}
               renderItem={RenderItem}
               keyExtractor={(item, index) => index}
             />
