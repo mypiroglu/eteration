@@ -10,8 +10,11 @@ import {
 import {Button, Header, Icon, BottomCard} from '../../components';
 import {useNavigation} from '@react-navigation/native';
 import styles from './style';
+import {addToBasket} from '../../redux/slice/basket-slice';
+import {useDispatch} from 'react-redux';
 
 export const ProductDetailScreen = ({route}) => {
+  const dispatch = useDispatch();
   const navigation = useNavigation();
   const {item} = route.params;
   const [isFavorite, setIsFavorite] = useState(false);
@@ -24,6 +27,12 @@ export const ProductDetailScreen = ({route}) => {
     navigation.goBack();
   };
   console.log('item', item);
+  const onHandlePressAddToBasket = () => {
+    // Burada sepete ekleme işlemi yapılacak. Sonra redux'a taşınacak. ASYNC STORAGE KULLANILACAK.
+    console.log('button31');
+    const quantity = 1;
+    dispatch(addToBasket({item: item, quantity: quantity}));
+  };
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView
@@ -52,7 +61,11 @@ export const ProductDetailScreen = ({route}) => {
           <Text style={styles.description}>{item.description}</Text>
         </View>
       </ScrollView>
-      <BottomCard price={item.price} style={styles.bottomContainer} />
+      <BottomCard
+        price={item.price}
+        style={styles.bottomContainer}
+        onPress={onHandlePressAddToBasket}
+      />
     </SafeAreaView>
   );
 };

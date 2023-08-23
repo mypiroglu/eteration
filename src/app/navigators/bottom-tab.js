@@ -8,9 +8,10 @@ import FavoriteStack from './favorite-stack';
 import colors from '../utils/colors';
 import Svg, {Path, Polygon} from 'react-native-svg';
 import sizing from '../theme/sizing';
-
+import {useSelector} from 'react-redux';
 const Tab = createBottomTabNavigator();
 const MyTabs = () => {
+  const {basket} = useSelector(state => state.basket);
   return (
     <Tab.Navigator
       initialRouteName="home-stack"
@@ -44,6 +45,7 @@ const MyTabs = () => {
         name="basket-stack"
         component={BasketStack}
         options={{
+          tabBarBadge: basket.length === 0 ? null : basket.length,
           tabBarLabel: '',
           tabBarIcon: ({focused}) => {
             return (

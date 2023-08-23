@@ -3,12 +3,15 @@ import {View, Image, Pressable} from 'react-native';
 import {Text, Button} from '..';
 import styles from './style';
 import {useNavigation} from '@react-navigation/native';
+import {useDispatch} from 'react-redux';
+import {plusOne, minusOne} from '../../redux/slice/basket-slice';
+import {addToBasket} from '../../redux/slice/basket-slice';
 
 export const InfoProductCard = ({data, preset = 'primary'}) => {
   const {item, quantity} = data;
   let {brand, price, image, description} = item;
-  console.log('item', item);
 
+  const dispatch = useDispatch();
   const [count, setCount] = useState(1);
   const navigation = useNavigation();
   const onHandlePress = () => {
@@ -17,15 +20,19 @@ export const InfoProductCard = ({data, preset = 'primary'}) => {
 
   const onHandlePressAddToBasket = () => {
     // Burada sepete ekleme işlemi yapılacak. Sonra redux'a taşınacak. ASYNC STORAGE KULLANILACAK.
+    console.log('button31');
+    const quantity = 1;
+    dispatch(addToBasket({item: item, quantity: quantity}));
   };
   const onHandlePressIncrease = () => {
     setCount(count + 1);
-
+    dispatch(plusOne(item));
     // Burada sepete ekleme işlemi yapılacak. Sonra redux'a taşınacak. ASYNC STORAGE KULLANILACAK.
   };
   const onHandlePressDecrease = () => {
     if (count > 0) {
       setCount(count - 1);
+      dispatch(minusOne(item));
     }
     // Burada sepete ekleme işlemi yapılacak. Sonra redux'a taşınacak. ASYNC STORAGE KULLANILACAK.
   };
