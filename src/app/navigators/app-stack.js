@@ -4,29 +4,39 @@ import {
   createStackNavigator,
   CardStyleInterpolators,
 } from '@react-navigation/stack';
-import {TestScreen, ProductDetailScreen} from '../screens';
+import {ProductDetailScreen} from '../screens';
 import MyTabs from './bottom-tab';
-// import AsyncStorage from '@react-native-community/async-storage';
 import colors from '../utils/colors';
 import {SafeAreaView, StyleSheet} from 'react-native';
-
+import AsyncStorage from '@react-native-community/async-storage';
+import {addToBasketInitial} from '../redux/slice/basket-slice';
+import {useDispatch} from 'react-redux';
 const AppStack = () => {
   const [onBoard, setOnBoard] = useState(false);
-
-  // const GetData = async () => {
-  //   try {
-  //     const value = await AsyncStorage.getItem('@first');
-  //     if (value !== null) {
-  //       setOnBoard(value);
-  //       console.log('value', value);
-  //     }
-  //   } catch (e) {
-  //     // Veri okuma hatası
-  //   }
-  // };
-  // useEffect(() => {
-  //   GetData();
-  // }, []);
+  const dispatch = useDispatch();
+  const [isFirstLoad, setIsFirstLoad] = useState(true);
+  // AsyncStorage.removeItem('basket');
+  isFirstLoad &&
+    AsyncStorage.getItem('basket')
+      .then(res => {
+        if (res) {
+          setIsFirstLoad(false);
+          const parsedData = JSON.parse(res);
+          parsedData.map(data => {
+            dispatch(
+              addToBasketInitial({
+                quantity: data.quantity,
+                item: data.item,
+              }),
+            );
+          });
+        } else {
+          console.log('Veri bulunamadı.');
+        }
+      })
+      .catch(error => {
+        console.error('Veri getirilirken bir hata oluştu:', error);
+      });
   const [isSplash, setIsSplash] = useState(true);
   const Stack = createStackNavigator();
 

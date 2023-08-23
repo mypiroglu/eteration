@@ -4,6 +4,7 @@ import {Provider} from 'react-redux';
 import {store} from './redux/store';
 import AppStack from './navigators/app-stack';
 import colors from './utils/colors';
+
 const App = () => {
   return (
     <View style={style.root}>

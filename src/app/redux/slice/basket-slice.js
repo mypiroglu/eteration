@@ -1,11 +1,23 @@
 import {createSlice} from '@reduxjs/toolkit';
-
+import AsyncStorage from '@react-native-community/async-storage';
 const basketSlice = createSlice({
   name: 'basketSlice',
   initialState: {
     basket: [],
   },
   reducers: {
+    addToBasketInitial: (state, action) => {
+      const {quantity, item} = action.payload;
+      const existingItemIndex = state.basket.findIndex(e => e.id === item.id);
+
+      if (existingItemIndex !== -1) {
+        // Ürün sepette zaten varsa sadece adeti arttırın
+        state.basket[existingItemIndex].quantity += quantity;
+      } else {
+        // Ürün sepette yoksa yeni bir öğe ekleyin
+        state.basket.push({item, quantity});
+      }
+    },
     addToBasket: (state, action) => {
       const {quantity, item} = action.payload;
 
@@ -20,6 +32,8 @@ const basketSlice = createSlice({
         // Ürün sepette yoksa yeni bir öğe ekleyin
         state.basket.push({item, quantity});
       }
+      AsyncStorage.removeItem('basket');
+      AsyncStorage.setItem('basket', JSON.stringify(state.basket));
     },
     plusOne: (state, action) => {
       const index = state.basket.findIndex(
@@ -28,6 +42,8 @@ const basketSlice = createSlice({
       if (index !== -1) {
         state.basket[index].quantity += 1;
       }
+      AsyncStorage.removeItem('basket');
+      AsyncStorage.setItem('basket', JSON.stringify(state.basket));
     },
 
     minusOne: (state, action) => {
@@ -37,6 +53,8 @@ const basketSlice = createSlice({
       if (index !== -1) {
         state.basket[index].quantity -= 1;
       }
+      AsyncStorage.removeItem('basket');
+      AsyncStorage.setItem('basket', JSON.stringify(state.basket));
     },
 
     removeFromBasket: (state, action) => {
@@ -46,10 +64,17 @@ const basketSlice = createSlice({
       if (index !== -1) {
         state.basket.splice(index, 1);
       }
+      AsyncStorage.removeItem('basket');
+      AsyncStorage.setItem('basket', JSON.stringify(state.basket));
     },
   },
 });
 
-export const {addToBasket, removeFromBasket, minusOne, plusOne} =
-  basketSlice.actions;
+export const {
+  addToBasket,
+  removeFromBasket,
+  minusOne,
+  plusOne,
+  addToBasketInitial,
+} = basketSlice.actions;
 export default basketSlice.reducer;

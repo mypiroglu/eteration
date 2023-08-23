@@ -1,17 +1,12 @@
 import React, {useEffect} from 'react';
 import {View, ActivityIndicator, FlatList} from 'react-native';
 import styles from './style';
-import {
-  Header,
-  ProductCard,
-  InfoProductCard,
-  BottomCard,
-} from '../../components';
+import {Header, InfoProductCard, BottomCard} from '../../components';
 import {useSelector} from 'react-redux';
 
 export const BasketScreen = () => {
   const {basket} = useSelector(state => state.basket);
-  console.log('basket', basket);
+
   const calculatedPrice = basket.reduce((acc, item) => {
     return acc + item.item.price * item.quantity;
   }, 0);
