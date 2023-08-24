@@ -1,10 +1,10 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {
   createStackNavigator,
   CardStyleInterpolators,
 } from '@react-navigation/stack';
-import {ProductDetailScreen} from '../screens';
+import {ProductDetailScreen, SplashScreen} from '../screens';
 import MyTabs from './bottom-tab';
 import colors from '../utils/colors';
 import {StyleSheet} from 'react-native';
@@ -12,8 +12,8 @@ import AsyncStorage from '@react-native-community/async-storage';
 import {addToBasketInitial} from '../redux/slice/basket-slice';
 import {addToFavoritesInitial} from '../redux/slice/favorites-slice';
 import {useDispatch} from 'react-redux';
+
 const AppStack = () => {
-  const [onBoard, setOnBoard] = useState(false);
   const dispatch = useDispatch();
   const [isFirstLoad, setIsFirstLoad] = useState(true);
   isFirstLoad &&
@@ -56,28 +56,41 @@ const AppStack = () => {
 
   const [isSplash, setIsSplash] = useState(true);
   const Stack = createStackNavigator();
-
   setTimeout(() => {
     setIsSplash(false);
   }, 2000);
-
+  const config = {
+    animation: 'spring',
+    config: {
+      stiffness: 1000,
+      damping: 500,
+      mass: 3,
+      overshootClamping: true,
+      restDisplacementThreshold: 0.01,
+      restSpeedThreshold: 0.01,
+    },
+  };
   return (
     <NavigationContainer>
       <Stack.Navigator
+        initialRouteName={'splash-screen'}
         screenOptions={{
+          transitionSpec: {
+            open: config,
+            close: config,
+          },
           gestureEnabled: false,
-          cardStyleInterpolator:
-            CardStyleInterpolators.forFadeFromBottomAndroid,
           headerShown: false,
           contentStyle: {backgroundColor: colors.white},
         }}>
+        {isSplash && (
+          <Stack.Screen name="splash-screen" component={SplashScreen} />
+        )}
         <Stack.Screen name="bottom-tab" component={MyTabs} />
         <Stack.Screen
           name="product-detail-screen"
           component={ProductDetailScreen}
         />
-        {/* {isSplash && <Stack.Screen name="test-screen" component={TestScreen} />} */}
-        {/* {!onBoard && <Stack.Screen name="test-screen" component={TestScreen} />} */}
       </Stack.Navigator>
     </NavigationContainer>
   );
