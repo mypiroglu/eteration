@@ -38,7 +38,7 @@ export const ProductCard = ({item}) => {
     } else {
       setIsFavorite(false);
     }
-  }, [item]);
+  }, [item, favorites]);
   return (
     <Pressable testID="Star" style={styles.root} onPress={onHandlePress}>
       <>

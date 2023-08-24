@@ -21,6 +21,10 @@ export default StyleSheet.create({
     paddingHorizontal: sizing.padding,
     marginBottom: Platform.OS === 'ios' ? 75 : 85,
   },
+  searchProductsContainer: {
+    flex: 1,
+    paddingHorizontal: sizing.padding,
+  },
   radioButtonContainer: {
     flexDirection: 'row',
     alignItems: 'center',

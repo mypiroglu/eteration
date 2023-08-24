@@ -6,6 +6,8 @@ import {
   Modal,
   Alert,
   SafeAreaView,
+  Keyboard,
+  Platform,
 } from 'react-native';
 import styles from './style';
 import {
@@ -26,9 +28,39 @@ export const HomeScreen = () => {
   const [searchText, setSearchText] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedSort, setSelectedSort] = useState(1);
-  const [sortedProducts, setSortedProducts] = useState([]);
   const [showProduct, setShowProduct] = useState(data);
+  const [keyboardStatus, setKeyboardStatus] = useState(false);
+  const [keyboardHeight, setKeyboardHeight] = useState(0);
+  // Klavye açıldığında çalışacak olan olay dinleyici
+  const keyboardDidShowListener = Keyboard.addListener(
+    'keyboardDidShow',
+    event => {
+      // Klavye açıkken yapılacak işlemler burada
+      console.log('Klavye açık');
+      const keyboardHeightCalculated = event.endCoordinates.height;
+      setKeyboardHeight(keyboardHeightCalculated);
+      setKeyboardStatus(true);
+    },
+  );
 
+  // Klavye kapandığında çalışacak olan olay dinleyici
+  const keyboardDidHideListener = Keyboard.addListener(
+    'keyboardDidHide',
+    () => {
+      // Klavye kapalıyken yapılacak işlemler burada
+      console.log('Klavye kapalı');
+      setKeyboardStatus(false);
+    },
+  );
+  function componentWillUnmount() {
+    keyboardDidShowListener.remove();
+    keyboardDidHideListener.remove();
+  }
+
+  useEffect(() => {
+    console.log(keyboardDidShowListener);
+    console.log(keyboardDidShowListener);
+  }, [keyboardDidHideListener, keyboardDidShowListener]);
   const RenderItem = ({item}) => {
     return (
       <View style={styles.itemContainer}>
@@ -201,8 +233,23 @@ export const HomeScreen = () => {
       </Modal>
 
       {searchText.length > 0 ? (
-        <View style={styles.productsContainer}>
+        <View
+          style={
+            !keyboardStatus
+              ? [
+                  styles.searchProductsContainer,
+                  {marginBottom: Platform.OS === 'ios' ? 75 : 85},
+                ]
+              : [
+                  styles.searchProductsContainer,
+                  {
+                    marginBottom:
+                      Platform.OS === 'ios' ? keyboardHeight - 30 : 0,
+                  },
+                ]
+          }>
           <FlatList
+            showsVerticalScrollIndicator={false}
             numColumns={2}
             data={filteredData}
             renderItem={RenderItem}
