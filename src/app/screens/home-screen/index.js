@@ -55,12 +55,12 @@ export const HomeScreen = () => {
 
   const sortAscending = () => {
     const sortedProduct = [...data].sort((a, b) => a.price - b.price);
-    setSortedProducts(sortedProduct);
+    setShowProduct(sortedProduct);
   };
 
   const sortDescending = () => {
     const sortedProduct = [...data].sort((a, b) => b.price - a.price);
-    setSortedProducts(sortedProduct);
+    setShowProduct(sortedProduct);
   };
 
   const RenderSortBy = ({item}) => {
@@ -116,12 +116,10 @@ export const HomeScreen = () => {
         setShowProduct(data);
         break;
       case 3:
-        sortAscending();
-        setShowProduct(sortedProducts);
+        sortDescending();
         break;
       case 4:
-        sortDescending();
-        setShowProduct(sortedProducts);
+        sortAscending();
         break;
       default:
         setShowProduct(data);
