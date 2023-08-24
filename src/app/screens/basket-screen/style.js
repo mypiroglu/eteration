@@ -21,4 +21,9 @@ export default StyleSheet.create({
     paddingHorizontal: sizing.padding,
     marginBottom: Platform.OS === 'ios' ? 75 : 85,
   },
+  emptyContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });

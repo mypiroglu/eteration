@@ -1,10 +1,11 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Platform} from 'react-native';
 import colors from '../../utils/colors';
 import sizing from '../../theme/sizing';
 export default StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.white,
+    paddingBottom: Platform.OS === 'ios' ? 75 : 85,
   },
   indicatorContainer: {
     flex: 1,
@@ -19,5 +20,10 @@ export default StyleSheet.create({
   productsContainer: {
     flex: 1,
     paddingHorizontal: sizing.padding,
+  },
+  emptyContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

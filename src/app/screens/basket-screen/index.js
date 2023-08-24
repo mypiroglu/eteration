@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {View, ActivityIndicator, FlatList} from 'react-native';
 import styles from './style';
-import {Header, InfoProductCard, BottomCard} from '../../components';
+import {Header, InfoProductCard, BottomCard, Text} from '../../components';
 import {useSelector} from 'react-redux';
 
 export const BasketScreen = () => {
@@ -22,15 +22,23 @@ export const BasketScreen = () => {
   return (
     <View style={styles.container}>
       <Header title="Basket Screen" />
-      <View style={styles.productsContainer}>
-        <FlatList
-          showsVerticalScrollIndicator={false}
-          data={basket}
-          renderItem={RenderItem}
-          keyExtractor={(item, index) => index}
-        />
-      </View>
-      <BottomCard price={calculatedPrice} title={'Complete'} />
+      {basket.length > 0 ? (
+        <>
+          <View style={styles.productsContainer}>
+            <FlatList
+              showsVerticalScrollIndicator={false}
+              data={basket}
+              renderItem={RenderItem}
+              keyExtractor={(item, index) => index}
+            />
+          </View>
+          <BottomCard price={calculatedPrice} title={'Complete'} />
+        </>
+      ) : (
+        <View style={styles.emptyContainer}>
+          <Text style={styles.emptyText}>No Products in Basket 🛒 </Text>
+        </View>
+      )}
     </View>
   );
 };

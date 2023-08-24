@@ -139,6 +139,13 @@ export const HomeScreen = () => {
     </View>
   ) : (
     <View style={styles.container}>
+      <Header title="Home Screen" />
+      <TextInput
+        placeholder={'Search'}
+        isSearch
+        text={searchText}
+        onChangeText={setSearchText}
+      />
       <Modal
         animationType="slide"
         transparent={true}
@@ -195,13 +202,6 @@ export const HomeScreen = () => {
         </SafeAreaView>
       </Modal>
 
-      <Header title="Home Screen" />
-      <TextInput
-        placeholder={'Search'}
-        isSearch
-        text={searchText}
-        onChangeText={setSearchText}
-      />
       {searchText.length > 0 ? (
         <View style={styles.productsContainer}>
           <FlatList
