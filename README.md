@@ -1,79 +1,51 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
-# Getting Started
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+### Genel Bilgiler
 
-## Step 1: Start the Metro Server
+- **Splash Screen:** Uygulama, başlangıçta bir "splash screen" ile açılıyor. Bu, uygulama başladığında ilk görünen ekran.
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+### Anasayfa
 
-To start Metro, run the following command from the _root_ of your React Native project:
+- **Arama ve Filtreleme:** Anasayfada ürünleri arama ve filtreleme seçenekleri bulunuyor. Arama, ürünlerin marka, açıklama, model, fiyat ve isim alanlarında dinamik olarak gerçekleştirilebiliyor. Arama sonuçlarına göre ürünler liste halinde görüntüleniyor. Arama kutusundaki kelime temizlendiğinde, standart ürün listesi geri getiriliyor.
 
-```bash
-# using npm
-npm start
+- **Sıralama:** Filtre butonu ile ürünleri ucuzdan pahalıya ve pahalıdan ucuza sıralayabiliyorsunuz. Ancak eskiden yeniye ve yeniden eskiye sıralama seçenekleri uygun değilse, bu sıralamalar standart sıralama ile eşleştirilmiş.
 
-# OR using Yarn
-yarn start
-```
+- **Ürün Detayı:** Ürün kartına tıkladığınızda, ürün detaylarına yönlendiriliyorsunuz.
 
-## Step 2: Start your Application
+### Ürün Detayı
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+- **Geri Dönme:** Ürün detay sayfasından geri dönebilirsiniz.
 
-### For Android
+- **Sepete Ekleme:** Ürünü sepete ekleyebilirsiniz. Bu işlem sırasında bir bilgi bildirimi görüntülenir ve sepete eklediğiniz her ürün için sepetin içindeki ürün sayısı artar. Farklı ürünler ayrı ayrı değil, ürün adedi artar.
 
-```bash
-# using npm
-npm run android
+- **Favorilere Ekleme ve Çıkarma:** Ürünü favorilere ekleyebilir veya çıkarabilirsiniz.
 
-# OR using Yarn
-yarn android
-```
+### Sepet
 
-### For iOS
+- **Sepetteki Ürünler:** Sepette bulunan ürünler listelenir.
 
-```bash
-# using npm
-npm run ios
+- **Adet Düşürme:** Ürün adedini düşürebilirsiniz. Adet 0 olduğunda, bir bilgi bildirimi görüntülenir ve ürünün sepetten kaldırılması için onay beklenir. İptal düğmesine basılırsa işlem gerçekleşmez ve 1 adet olarak kalır. Ürün fiyatları kontrol edilir.
 
-# OR using Yarn
-yarn ios
-```
+- **Adet Artırma:** Ürün adedini artırabilirsiniz.
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
+- **Toplam Tutar:** Ürün adedi ve birim fiyatına göre hesaplanır ve toplam tutar görüntülenir.
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+- **Ürünü Sepetten Kaldırma:** Ürün kartının üzerine (görsel hariç) uzun süre basılı tutarsanız, ürünü sepetten tamamen kaldırabilirsiniz.
 
-## Step 3: Modifying your App
+- **Ürün Detayına Gitme:** Ürün üzerine tıklarsanız, ürün detayına yönlendirilirsiniz. Buradan tekrar sepete ekleme ve favorilere ekleme/çıkarma işlemleri yapabilirsiniz.
 
-Now that you have successfully run the app, let's modify it.
+- **Uygulama Kapatma ve Açma:** Uygulamadan tamamen çıkıp tekrar açıldığında, sepet bilgileri tekrar yüklenir.
 
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
+### Favoriler
 
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
+- **Favorilere Ekleme ve Çıkarma:** Favori ürünlerinizi listeleme ve bu ürünleri sepete ekleyebilme imkanınız var.
 
-## Congratulations! :tada:
+- **Ürün Detaylarına Gitme:** Ürün kartına tıklarsanız, ürünün detaylarına gidilir. Buradan tekrar sepete ekleme ve favoriden çıkarma/ekleme işlemleri yapılabilir.
 
-You've successfully run and modified your React Native App. :partying_face:
+- **Favoriden Silme:** Ürün kartının üzerine (görsel hariç) uzun süre basılı tutarsanız, ürünü favori listesinden tamamen kaldırabilirsiniz.
 
-### Now what?
+### Profil
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
+- **Sosyal Medya Hesaplarına Linkleme:** Profil bölümünde, Github, LinkedIn ve Instagram hesaplarına yönlendirmeler bulunur.
 
-# Troubleshooting
-
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+İhtiyacınız olan herhangi bir özel soru veya bilgi varsa, sormaktan çekinmeyin!
