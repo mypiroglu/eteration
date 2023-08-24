@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`InfoProductCard Component calls navigation when pressed 1`] = `[MockFunction]`;
