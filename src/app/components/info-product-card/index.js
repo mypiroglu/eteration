@@ -54,7 +54,9 @@ export const InfoProductCard = ({data, preset = 'primary'}) => {
     dispatch(plusOne(item));
   };
   const onHandlePressDecrease = () => {
-    if (quantity > 0) {
+    if (quantity - 1 === 0) {
+      onHandleLongPress();
+    } else if (quantity - 1 > 0) {
       setCount(count - 1);
       dispatch(minusOne(item));
     }

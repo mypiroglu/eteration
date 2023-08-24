@@ -55,7 +55,7 @@ const basketSlice = createSlice({
 
     removeFromBasket: (state, action) => {
       const index = state.basket.findIndex(
-        item => item.id === action.payload.id,
+        item => item.item.id === action.payload.item.id,
       );
       if (index !== -1) {
         state.basket.splice(index, 1);
