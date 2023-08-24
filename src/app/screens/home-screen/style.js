@@ -42,5 +42,14 @@ export default StyleSheet.create({
     flex: 1,
     backgroundColor: colors.grey,
     paddingHorizontal: sizing.padding,
+    paddingBottom: sizing.padding,
+  },
+  modelContentContainer: {
+    height: 160,
+    marginVertical: 10,
+  },
+  modal: {
+    flex: 1,
+    backgroundColor: colors.grey,
   },
 });

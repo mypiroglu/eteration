@@ -34,4 +34,28 @@ export default StyleSheet.create({
     paddingHorizontal: sizing.padding,
     marginBottom: sizing.componentHeight * 2,
   },
+  icon: {
+    width: 40,
+    height: 40,
+    margin: 5,
+  },
+  container: {
+    flex: 1,
+  },
+  head: {
+    height: 250,
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  profileimage: {
+    height: 200,
+    width: 200,
+    borderRadius: 30,
+    borderWidth: 2,
+  },
+  desctitle: {
+    textAlign: 'center',
+    marginTop: 20,
+  },
 });

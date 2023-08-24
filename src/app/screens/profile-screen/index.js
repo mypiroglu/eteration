@@ -8,7 +8,7 @@ import {
   Linking,
 } from 'react-native';
 import React from 'react';
-
+import styles from './style';
 export const ProfileScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
@@ -68,62 +68,40 @@ export const ProfileScreen = () => {
             source={{
               uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/JavaScript-logo.png/800px-JavaScript-logo.png',
             }}
-            style={{width: 40, height: 40, margin: 5}}
+            style={styles.icon}
           />
           <Image
             source={{
               uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Typescript_logo_2020.svg/2048px-Typescript_logo_2020.svg.png',
             }}
-            style={{width: 40, height: 40, margin: 5}}
+            style={styles.icon}
           />
           <Image
             source={{
               uri: 'https://cdn3.iconfinder.com/data/icons/logos-and-brands-adobe/512/267_Python-512.png',
             }}
-            style={{width: 40, height: 40, margin: 5}}
+            style={styles.icon}
           />
           <Image
             source={{
               uri: 'https://firebase.google.com/static/images/brand-guidelines/logo-logomark.png',
             }}
-            style={{width: 40, height: 40, margin: 5}}
+            style={styles.icon}
           />
           <Image
             source={{
               uri: 'https://assets.stickpng.com/images/5848309bcef1014c0b5e4a9a.png',
             }}
-            style={{width: 40, height: 40, margin: 5}}
+            style={styles.icon}
           />
           <Image
             source={{
               uri: 'https://www.drupal.org/files/project-images/screenshot_361.png',
             }}
-            style={{width: 40, height: 40, margin: 5}}
+            style={styles.icon}
           />
         </View>
       </View>
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  head: {
-    height: 250,
-    width: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  profileimage: {
-    height: 200,
-    width: 200,
-    borderRadius: 30,
-    borderWidth: 2,
-  },
-  desctitle: {
-    textAlign: 'center',
-    marginTop: 20,
-  },
-});

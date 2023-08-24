@@ -19,7 +19,6 @@ import {
 import {useDispatch, useSelector} from 'react-redux';
 import {getData} from '../../api';
 import colors from '../../utils/colors';
-import {useFocusEffect} from '@react-navigation/native';
 
 export const HomeScreen = () => {
   const dispatch = useDispatch();
@@ -29,6 +28,53 @@ export const HomeScreen = () => {
   const [selectedSort, setSelectedSort] = useState(1);
   const [sortedProducts, setSortedProducts] = useState([]);
   const [showProduct, setShowProduct] = useState(data);
+
+  const RenderItem = ({item}) => {
+    return (
+      <View style={styles.itemContainer}>
+        <ProductCard item={item} />
+      </View>
+    );
+  };
+
+  const RenderBrandList = ({item}) => {
+    return (
+      <View style={styles.radioButtonContainer}>
+        <Text style={styles.radioButtonText}>{item.brand}</Text>
+      </View>
+    );
+  };
+
+  const RenderModelList = ({item}) => {
+    return (
+      <View style={styles.radioButtonContainer}>
+        <Text style={styles.radioButtonText}>{item.model}</Text>
+      </View>
+    );
+  };
+
+  const sortAscending = () => {
+    const sortedProduct = [...data].sort((a, b) => a.price - b.price);
+    setSortedProducts(sortedProduct);
+  };
+
+  const sortDescending = () => {
+    const sortedProduct = [...data].sort((a, b) => b.price - a.price);
+    setSortedProducts(sortedProduct);
+  };
+
+  const RenderSortBy = ({item}) => {
+    return (
+      <View style={styles.radioButtonContainer}>
+        <RadioButton
+          setState={setSelectedSort}
+          item={item}
+          state={selectedSort === item.id}
+        />
+        <Text style={styles.radioButtonText}>{item.name}</Text>
+      </View>
+    );
+  };
 
   const filteredData =
     searchText !== '' &&
@@ -41,13 +87,7 @@ export const HomeScreen = () => {
         item.name.toLowerCase().includes(searchText.toLowerCase())
       );
     });
-  const RenderItem = ({item}) => {
-    return (
-      <View style={styles.itemContainer}>
-        <ProductCard item={item} />
-      </View>
-    );
-  };
+
   const sortBy = [
     {
       id: 1,
@@ -67,45 +107,6 @@ export const HomeScreen = () => {
     },
   ];
 
-  const RenderBrandList = ({item}) => {
-    return (
-      <View style={styles.radioButtonContainer}>
-        <Text style={styles.radioButtonText}>{item.brand}</Text>
-      </View>
-    );
-  };
-  const RenderModelList = ({item}) => {
-    return (
-      <View style={styles.radioButtonContainer}>
-        <Text style={styles.radioButtonText}>{item.model}</Text>
-      </View>
-    );
-  };
-  useEffect(() => {
-    dispatch(getData());
-  }, []);
-
-  const sortAscending = () => {
-    const sortedProduct = [...data].sort((a, b) => a.price - b.price);
-    setSortedProducts(sortedProduct);
-  };
-
-  const sortDescending = () => {
-    const sortedProduct = [...data].sort((a, b) => b.price - a.price);
-    setSortedProducts(sortedProduct);
-  };
-  const RenderSortBy = ({item}) => {
-    return (
-      <View style={styles.radioButtonContainer}>
-        <RadioButton
-          setState={setSelectedSort}
-          item={item}
-          state={selectedSort === item.id}
-        />
-        <Text style={styles.radioButtonText}>{item.name}</Text>
-      </View>
-    );
-  };
   useEffect(() => {
     switch (selectedSort) {
       case 1:
@@ -129,8 +130,9 @@ export const HomeScreen = () => {
   }, [selectedSort, data]);
 
   useEffect(() => {
-    console.log('showProduct', showProduct);
-  }, [showProduct]);
+    dispatch(getData());
+  }, []);
+
   return isLoading ? (
     <View style={styles.indicatorContainer}>
       <ActivityIndicator size="large" color={colors.blue} />
@@ -144,7 +146,7 @@ export const HomeScreen = () => {
         onRequestClose={() => {
           Alert.alert('Modal has been closed.');
         }}>
-        <SafeAreaView style={{flex: 1, backgroundColor: 'red'}}>
+        <SafeAreaView style={styles.modal}>
           <Header
             title="Home Screen"
             leftIcon={'Back'}
@@ -152,7 +154,7 @@ export const HomeScreen = () => {
           />
           <View style={styles.modalContainer}>
             <Text>Sort By</Text>
-            <View style={{marginVertical: 10}}>
+            <View style={styles.modelContentContainer}>
               <FlatList
                 data={sortBy}
                 renderItem={RenderSortBy}
@@ -167,7 +169,7 @@ export const HomeScreen = () => {
               text={searchText}
               onChangeText={setSearchText}
             />
-            <View style={{height: 100, marginVertical: 10}}>
+            <View style={styles.modelContentContainer}>
               <FlatList
                 data={data}
                 renderItem={RenderBrandList}
@@ -182,7 +184,7 @@ export const HomeScreen = () => {
               text={searchText}
               onChangeText={setSearchText}
             />
-            <View style={{height: 100, marginVertical: 10}}>
+            <View style={styles.modelContentContainer}>
               <FlatList
                 data={data}
                 renderItem={RenderModelList}
