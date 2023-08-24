@@ -13,7 +13,7 @@ export const Button = ({
     <TouchableOpacity
       style={
         disabled
-          ? [styles.button, style, {backgroundColor: '#000'}]
+          ? [{backgroundColor: '#000'}, styles.button, style]
           : [styles.button, style]
       }
       onPress={onPress}

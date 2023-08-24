@@ -40,7 +40,7 @@ export const ProductCard = ({item}) => {
     }
   }, [item]);
   return (
-    <Pressable style={styles.root} onPress={onHandlePress}>
+    <Pressable testID="Star" style={styles.root} onPress={onHandlePress}>
       <>
         <View style={styles.image}>
           <Pressable style={styles.icon} onPress={onHandlePressIcon}>

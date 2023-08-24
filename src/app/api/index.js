@@ -11,15 +11,6 @@ const instance = axios.create({
   },
 });
 
-axios
-  .get(BASE_URL)
-  .then(response => {
-    console.log(response.data);
-  })
-  .catch(error => {
-    console.error('Error :', error);
-  });
-
 export const getData = createAsyncThunk('products', async () => {
   const res = await instance.get('products');
   return res.data;

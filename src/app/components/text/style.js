@@ -10,6 +10,6 @@ export default StyleSheet.create({
   buttonText: {
     fontSize: sizing.body,
     fontWeight: '600',
-    color: colors.cinnabar,
+    color: colors.black,
   },
 });

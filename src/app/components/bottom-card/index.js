@@ -3,7 +3,12 @@ import {View} from 'react-native';
 import {Text, Button} from '../';
 import styles from './style';
 
-export const BottomCard = ({title = 'Add to cart', price, onPress, style}) => {
+export const BottomCard = ({
+  title = 'Add to cart',
+  price = 0,
+  onPress,
+  style,
+}) => {
   return (
     <View style={[styles.bottomContainer, style]}>
       <View>
@@ -11,7 +16,6 @@ export const BottomCard = ({title = 'Add to cart', price, onPress, style}) => {
         <Text style={styles.priceNumber}>{price} ₺</Text>
       </View>
       <Button title={title} onPress={onPress} />
-      {/* burada sepete eklenecek */}
     </View>
   );
 };

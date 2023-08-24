@@ -6,7 +6,10 @@ export const RadioButton = ({item, setState, style, state}) => {
     setState(item.id);
   };
   return (
-    <TouchableOpacity style={[styles.root, style]} onPress={onHandlePress}>
+    <TouchableOpacity
+      testID="radio-button"
+      style={[styles.root, style]}
+      onPress={onHandlePress}>
       {state && <View style={styles.inside} />}
     </TouchableOpacity>
   );
