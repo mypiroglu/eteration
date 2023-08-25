@@ -1,4 +1,4 @@
-###Uygulama Android ve Ios ekran video kaydı
+###Uygulama Android ve iOS ekran video kaydı
 -https://drive.google.com/drive/folders/1IxhNT2rF2zC60JLlyB6_BSYsAxrXr58j
 
 ### Genel Bilgiler
