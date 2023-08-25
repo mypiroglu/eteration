@@ -22,6 +22,7 @@ import {
 import {useDispatch, useSelector} from 'react-redux';
 import {getData} from '../../api';
 import colors from '../../utils/colors';
+import {ScrollView} from 'react-native-gesture-handler';
 
 export const HomeScreen = () => {
   const dispatch = useDispatch();
@@ -217,51 +218,65 @@ export const HomeScreen = () => {
           Alert.alert('Modal has been closed.');
         }}>
         <SafeAreaView style={styles.modal}>
-          <Header
-            title="Home Screen"
-            leftIcon={'Back'}
-            onLeftPress={() => setModalVisible(false)}
-          />
-          <View style={styles.modalContainer}>
-            <Text>Sort By</Text>
-            <View style={styles.modelContentContainer}>
-              <FlatList
-                data={sortBy}
-                renderItem={RenderSortBy}
-                keyExtractor={(item, index) => index}
-              />
-            </View>
-            <View style={styles.divider} />
-            <Text>Brand</Text>
-            <TextInput
-              placeholder={'Search'}
-              isSearch
-              text={searchBrandText}
-              onChangeText={setSearchBrandText}
+          <ScrollView
+            nestedScrollEnabled={true}
+            style={
+              !keyboardStatus
+                ? [{marginBottom: Platform.OS === 'ios' ? 75 : 85, flexGrow: 1}]
+                : [
+                    {
+                      flexGrow: 1,
+                      marginBottom:
+                        Platform.OS === 'ios' ? keyboardHeight - 30 : 0,
+                    },
+                  ]
+            }>
+            <Header
+              title="Home Screen"
+              leftIcon={'Back'}
+              onLeftPress={() => setModalVisible(false)}
             />
-            <View style={styles.modelContentContainer}>
-              <FlatList
-                data={filteredBrand ? filteredBrand : data}
-                renderItem={RenderBrandList}
-                keyExtractor={(item, index) => index}
+            <View style={styles.modalContainer}>
+              <Text>Sort By</Text>
+              <View style={styles.modelContentContainer}>
+                <FlatList
+                  data={sortBy}
+                  renderItem={RenderSortBy}
+                  keyExtractor={(item, index) => index}
+                />
+              </View>
+              <View style={styles.divider} />
+              <Text>Brand</Text>
+              <TextInput
+                placeholder={'Search'}
+                isSearch
+                text={searchBrandText}
+                onChangeText={setSearchBrandText}
               />
-            </View>
-            <View style={styles.divider} />
-            <Text>Model</Text>
-            <TextInput
-              placeholder={'Search'}
-              isSearch
-              text={searchModelText}
-              onChangeText={setSearchModelText}
-            />
-            <View style={styles.modelContentContainer}>
-              <FlatList
-                data={filteredModel ? filteredModel : data}
-                renderItem={RenderModelList}
-                keyExtractor={(item, index) => index}
+              <View style={styles.modelContentContainer}>
+                <FlatList
+                  data={filteredBrand ? filteredBrand : data}
+                  renderItem={RenderBrandList}
+                  keyExtractor={(item, index) => index}
+                />
+              </View>
+              <View style={styles.divider} />
+              <Text>Model</Text>
+              <TextInput
+                placeholder={'Search'}
+                isSearch
+                text={searchModelText}
+                onChangeText={setSearchModelText}
               />
+              <View style={styles.modelContentContainer}>
+                <FlatList
+                  data={filteredModel ? filteredModel : data}
+                  renderItem={RenderModelList}
+                  keyExtractor={(item, index) => index}
+                />
+              </View>
             </View>
-          </View>
+          </ScrollView>
         </SafeAreaView>
       </Modal>
 
