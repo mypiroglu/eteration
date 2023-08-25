@@ -1,8 +1,8 @@
 import React from 'react';
-import {render, fireEvent} from '@testing-library/react-native';
-import {Header} from '../src/app/components/header'; // Import the Header component
+import {render} from '@testing-library/react-native';
+import {Header} from '../src/app/components/header';
 import {NavigationContainer} from '@react-navigation/native';
-import {useNavigation} from '@react-navigation/native';
+
 jest.mock('@react-navigation/native');
 
 describe('Header Component', () => {

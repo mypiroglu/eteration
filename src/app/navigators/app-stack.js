@@ -43,7 +43,6 @@ const AppStack = () => {
           setIsFirstLoad(false);
           const parsedData = JSON.parse(res);
           parsedData.map(data => {
-            console.log('data', typeof data);
             dispatch(addToFavoritesInitial(data));
           });
         } else {

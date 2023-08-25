@@ -10,9 +10,7 @@ export const FavoriteScreen = () => {
   const RenderItem = item => {
     return <InfoProductCard data={item} preset="secondary" />;
   };
-  useEffect(() => {
-    console.log('favorites', favorites);
-  }, [favorites]);
+
   return (
     <View style={styles.container}>
       <Header title="Favorite Screen" />

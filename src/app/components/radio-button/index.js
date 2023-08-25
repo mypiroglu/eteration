@@ -1,7 +1,7 @@
 import React from 'react';
 import {TouchableOpacity, View} from 'react-native';
 import styles from './style';
-export const RadioButton = ({item, setState, style, state}) => {
+export const RadioButton = ({item, setState, style, state, filter = false}) => {
   const onHandlePress = () => {
     setState(item.id);
   };
@@ -9,7 +9,8 @@ export const RadioButton = ({item, setState, style, state}) => {
     <TouchableOpacity
       testID="radio-button"
       style={[styles.root, style]}
-      onPress={onHandlePress}>
+      onPress={onHandlePress}
+      disabled={filter}>
       {state && <View style={styles.inside} />}
     </TouchableOpacity>
   );

@@ -7,7 +7,7 @@ import {
   addToFavorites,
   removeFromFavorites,
 } from '../../redux/slice/favorites-slice';
-import {addToBasket, removeFromBasket} from '../../redux/slice/basket-slice';
+import {addToBasket} from '../../redux/slice/basket-slice';
 import {useDispatch, useSelector} from 'react-redux';
 
 export const ProductCard = ({item}) => {

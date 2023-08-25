@@ -12,11 +12,7 @@ export const TestScreen = () => {
   useEffect(() => {
     dispatch(getData());
   }, []);
-  useEffect(() => {
-    console.log('-------');
-    console.log(data);
-    console.log('-------');
-  }, [data]);
+
   const RenderItem = ({item}) => {
     return (
       <View style={styles.itemContainer}>

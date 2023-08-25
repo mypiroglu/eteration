@@ -34,7 +34,7 @@ export const ProductDetailScreen = ({route}) => {
   const onHandlePressBack = () => {
     navigation.goBack();
   };
-  console.log('item', item);
+
   const onHandlePressAddToBasket = () => {
     const quantity = 1;
     dispatch(addToBasket({item: item, quantity: quantity}));
@@ -50,9 +50,7 @@ export const ProductDetailScreen = ({route}) => {
       setIsFavorite(false);
     }
   }, [item]);
-  useEffect(() => {
-    console.log('item', item.description);
-  }, [item]);
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView

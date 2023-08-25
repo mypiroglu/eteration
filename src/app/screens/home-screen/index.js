@@ -8,6 +8,7 @@ import {
   SafeAreaView,
   Keyboard,
   Platform,
+  Pressable,
 } from 'react-native';
 import styles from './style';
 import {
@@ -26,41 +27,31 @@ export const HomeScreen = () => {
   const dispatch = useDispatch();
   const {data, isLoading} = useSelector(state => state.products);
   const [searchText, setSearchText] = useState('');
+  const [searchModelText, setSearchModelText] = useState('');
+  const [searchBrandText, setSearchBrandText] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedSort, setSelectedSort] = useState(1);
   const [showProduct, setShowProduct] = useState(data);
   const [keyboardStatus, setKeyboardStatus] = useState(false);
   const [keyboardHeight, setKeyboardHeight] = useState(0);
-  // Klavye açıldığında çalışacak olan olay dinleyici
+  const [brand, setBrand] = useState([]);
+  const [model, setModel] = useState([]);
   const keyboardDidShowListener = Keyboard.addListener(
     'keyboardDidShow',
     event => {
-      // Klavye açıkken yapılacak işlemler burada
-      console.log('Klavye açık');
       const keyboardHeightCalculated = event.endCoordinates.height;
       setKeyboardHeight(keyboardHeightCalculated);
       setKeyboardStatus(true);
     },
   );
 
-  // Klavye kapandığında çalışacak olan olay dinleyici
   const keyboardDidHideListener = Keyboard.addListener(
     'keyboardDidHide',
     () => {
-      // Klavye kapalıyken yapılacak işlemler burada
-      console.log('Klavye kapalı');
       setKeyboardStatus(false);
     },
   );
-  function componentWillUnmount() {
-    keyboardDidShowListener.remove();
-    keyboardDidHideListener.remove();
-  }
 
-  useEffect(() => {
-    console.log(keyboardDidShowListener);
-    console.log(keyboardDidShowListener);
-  }, [keyboardDidHideListener, keyboardDidShowListener]);
   const RenderItem = ({item}) => {
     return (
       <View style={styles.itemContainer}>
@@ -70,27 +61,46 @@ export const HomeScreen = () => {
   };
 
   const RenderBrandList = ({item}) => {
+    const isBrandSelected = brand.some(brandItem => brandItem.id === item.id);
+    const check = () => {
+      if (isBrandSelected) {
+        const newBrand = brand.filter(brandItem => brandItem.id !== item.id);
+        setBrand(newBrand);
+      } else {
+        setBrand([...brand, item]);
+      }
+    };
     return (
-      <View style={styles.radioButtonContainer}>
+      <Pressable style={styles.radioButtonContainer} onPress={check}>
+        <RadioButton state={isBrandSelected} filter />
         <Text style={styles.radioButtonText}>{item.brand}</Text>
-      </View>
+      </Pressable>
     );
   };
-
   const RenderModelList = ({item}) => {
+    const isModelSelected = model.some(modelItem => modelItem.id === item.id);
+    const check = () => {
+      if (isModelSelected) {
+        const newModel = model.filter(modelItem => modelItem.id !== item.id);
+        setModel(newModel);
+      } else {
+        setModel([...model, item]);
+      }
+    };
     return (
-      <View style={styles.radioButtonContainer}>
+      <Pressable style={styles.radioButtonContainer} onPress={check}>
+        <RadioButton state={isModelSelected} filter />
         <Text style={styles.radioButtonText}>{item.model}</Text>
-      </View>
+      </Pressable>
     );
   };
 
-  const sortAscending = () => {
+  const sortAscending = data => {
     const sortedProduct = [...data].sort((a, b) => a.price - b.price);
     setShowProduct(sortedProduct);
   };
 
-  const sortDescending = () => {
+  const sortDescending = data => {
     const sortedProduct = [...data].sort((a, b) => b.price - a.price);
     setShowProduct(sortedProduct);
   };
@@ -108,16 +118,33 @@ export const HomeScreen = () => {
     );
   };
 
-  const filteredData =
-    searchText !== '' &&
+  const filteredData = data?.filter(item => {
+    const brandAndModelFilter =
+      brand.length === 0 ||
+      (brand.some(brandItem => brandItem.brand === item.brand) &&
+        model.length === 0) ||
+      model.some(modelItem => modelItem.model === item.model);
+
+    const textFilter =
+      item.brand.toLowerCase().includes(searchText.toLowerCase()) ||
+      item.description.toLowerCase().includes(searchText.toLowerCase()) ||
+      item.model.toLowerCase().includes(searchText.toLowerCase()) ||
+      item.price.toString().includes(searchText.toLowerCase()) ||
+      item.name.toLowerCase().includes(searchText.toLowerCase());
+
+    return brandAndModelFilter && textFilter;
+  });
+
+  const filteredBrand =
+    searchBrandText !== '' &&
     data.filter(item => {
-      return (
-        item.brand.toLowerCase().includes(searchText.toLowerCase()) ||
-        item.description.toLowerCase().includes(searchText.toLowerCase()) ||
-        item.model.toLowerCase().includes(searchText.toLowerCase()) ||
-        item.price.toString().includes(searchText.toLowerCase()) ||
-        item.name.toLowerCase().includes(searchText.toLowerCase())
-      );
+      return item.brand.toLowerCase().includes(searchBrandText.toLowerCase());
+    });
+
+  const filteredModel =
+    searchModelText !== '' &&
+    data.filter(item => {
+      return item.model.toLowerCase().includes(searchModelText.toLowerCase());
     });
 
   const sortBy = [
@@ -148,10 +175,10 @@ export const HomeScreen = () => {
         setShowProduct(data);
         break;
       case 3:
-        sortDescending();
+        sortDescending(filteredData);
         break;
       case 4:
-        sortAscending();
+        sortAscending(filteredData);
         break;
       default:
         setShowProduct(data);
@@ -175,6 +202,12 @@ export const HomeScreen = () => {
         isSearch
         text={searchText}
         onChangeText={setSearchText}
+      />
+      <Button
+        title="Filter"
+        onPress={() => {
+          setModalVisible(true);
+        }}
       />
       <Modal
         animationType="slide"
@@ -203,12 +236,12 @@ export const HomeScreen = () => {
             <TextInput
               placeholder={'Search'}
               isSearch
-              text={searchText}
-              onChangeText={setSearchText}
+              text={searchBrandText}
+              onChangeText={setSearchBrandText}
             />
             <View style={styles.modelContentContainer}>
               <FlatList
-                data={data}
+                data={filteredBrand ? filteredBrand : data}
                 renderItem={RenderBrandList}
                 keyExtractor={(item, index) => index}
               />
@@ -218,12 +251,12 @@ export const HomeScreen = () => {
             <TextInput
               placeholder={'Search'}
               isSearch
-              text={searchText}
-              onChangeText={setSearchText}
+              text={searchModelText}
+              onChangeText={setSearchModelText}
             />
             <View style={styles.modelContentContainer}>
               <FlatList
-                data={data}
+                data={filteredModel ? filteredModel : data}
                 renderItem={RenderModelList}
                 keyExtractor={(item, index) => index}
               />
@@ -232,7 +265,7 @@ export const HomeScreen = () => {
         </SafeAreaView>
       </Modal>
 
-      {searchText.length > 0 ? (
+      {searchText?.length > 0 || brand.length > 0 || model.length > 0 ? (
         <View
           style={
             !keyboardStatus
@@ -258,12 +291,6 @@ export const HomeScreen = () => {
         </View>
       ) : (
         <>
-          <Button
-            title="Filter"
-            onPress={() => {
-              setModalVisible(true);
-            }}
-          />
           <View style={styles.productsContainer}>
             <FlatList
               showsVerticalScrollIndicator={false}

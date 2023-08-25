@@ -4,7 +4,6 @@ import {BottomCard} from '../src/app/components/bottom-card';
 
 describe('BottomCard Component', () => {
   it('renders with default title and price', () => {
-    // Bileşeni varsayılan değerlerle render edin
     const {getByText} = render(<BottomCard />);
 
     expect(getByText('Add to cart')).toBeTruthy();

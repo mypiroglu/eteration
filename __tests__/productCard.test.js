@@ -14,8 +14,6 @@ import {
 } from '../src/app/redux/slice/basket-slice';
 
 const mockStore = configureMockStore();
-const store = mockStore({});
-const navigation = {navigate: jest.fn()};
 
 describe('Redux Actions', () => {
   it('should create an action to add a product to favorites', () => {
@@ -82,8 +80,6 @@ describe('<ProductCard />', () => {
         </NavigationContainer>
       </Provider>,
     );
-
-    // Render işlemini kontrol etmek için uygun testleri yazın
   });
 
   it('handles addToFavorites and removeFromFavorites', () => {
@@ -105,12 +101,10 @@ describe('<ProductCard />', () => {
 
     const favoriteIcon = getByTestId('Star');
 
-    // İlk olarak, addToFavorites'i çağırın ve Redux store'unda beklendiği gibi güncellemesini sağlayın
     fireEvent.press(favoriteIcon);
     const actions = store.getActions();
     expect(actions).toMatchSnapshot();
 
-    // Daha sonra removeFromFavorites'i çağırın ve Redux store'unda beklendiği gibi güncellemesini sağlayın
     fireEvent.press(favoriteIcon);
     const newActions = store.getActions();
     expect(newActions).toMatchSnapshot();
@@ -135,7 +129,6 @@ describe('<ProductCard />', () => {
 
     const addButton = getByText('Add to Cart');
 
-    // addToBasket'i çağırın ve Redux store'unda beklendiği gibi güncellemesini sağlayın
     fireEvent.press(addButton);
     const actions = store.getActions();
     const expectedAction = addToBasket({item: item, quantity: 1});
