@@ -19,10 +19,10 @@ export const ProfileScreen = () => {
       </View>
 
       <View style={{alignItems: 'center'}}>
-        <Text style={{fontSize: 24, marginTop: 20}}>
+        <Text style={{fontSize: 24, marginTop: 20, textAlign: 'center'}}>
           Hi 👋, I'm Muhammet Yusuf Piroğlu
         </Text>
-        <Text style={{fontSize: 18, marginTop: 10}}>
+        <Text style={{fontSize: 18, marginTop: 10, textAlign: 'center'}}>
           Mid. React Native Developer
         </Text>
 
