@@ -37,6 +37,7 @@ export const HomeScreen = () => {
   const [keyboardHeight, setKeyboardHeight] = useState(0);
   const [brand, setBrand] = useState([]);
   const [model, setModel] = useState([]);
+
   const keyboardDidShowListener = Keyboard.addListener(
     'keyboardDidShow',
     event => {
@@ -193,7 +194,7 @@ export const HomeScreen = () => {
 
   return isLoading ? (
     <View style={styles.indicatorContainer}>
-      <ActivityIndicator size="large" color={colors.blue} />
+      <ActivityIndicator size="large" color={colors.orange} />
     </View>
   ) : (
     <View style={styles.container}>

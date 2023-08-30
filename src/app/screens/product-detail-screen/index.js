@@ -8,7 +8,7 @@ import {
   Pressable,
   Alert,
 } from 'react-native';
-import {Button, Header, Icon, BottomCard} from '../../components';
+import {Header, Icon, BottomCard} from '../../components';
 import {useNavigation} from '@react-navigation/native';
 import styles from './style';
 import {addToBasket} from '../../redux/slice/basket-slice';
@@ -77,9 +77,7 @@ export const ProductDetailScreen = ({route}) => {
           <Text>{item.brand} </Text>
           <Text>{item.name}</Text>
         </Text>
-        <Text style={styles.description}>
-          {item.description}asdasdasdasdasd
-        </Text>
+        <Text style={styles.description}>{item.description}</Text>
       </ScrollView>
       <BottomCard
         price={item.price}

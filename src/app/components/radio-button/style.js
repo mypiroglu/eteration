@@ -6,7 +6,7 @@ export default StyleSheet.create({
     borderRadius: 15,
     width: 30,
     height: 30,
-    borderColor: colors.blue,
+    borderColor: colors.orange,
     borderWidth: 2,
     justifyContent: 'center',
     alignItems: 'center',
@@ -15,6 +15,6 @@ export default StyleSheet.create({
     borderRadius: 7.5,
     width: 15,
     height: 15,
-    backgroundColor: colors.blue,
+    backgroundColor: colors.orange,
   },
 });

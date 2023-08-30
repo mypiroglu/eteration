@@ -21,7 +21,7 @@ export default StyleSheet.create({
   priceText: {
     fontSize: sizing.caption,
     fontWeight: '500',
-    color: colors.blue,
+    color: colors.orange,
     marginTop: sizing.padding * 1.5,
     lineHeight: 17.07,
   },
