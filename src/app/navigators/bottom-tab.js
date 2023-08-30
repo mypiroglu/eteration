@@ -50,6 +50,10 @@ const MyTabs = () => {
         component={BasketStack}
         options={{
           tabBarBadge: basket.length === 0 ? null : basket.length,
+          tabBarBadgeStyle: {
+            backgroundColor: colors.blackOpacity,
+            marginTop: Platform.OS === 'ios' ? 13 : 7,
+          },
           tabBarLabel: '',
           tabBarIcon: ({focused}) => {
             return (
