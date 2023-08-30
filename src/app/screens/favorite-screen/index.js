@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {View, FlatList} from 'react-native';
 import styles from './style';
 import {Header, InfoProductCard, Text} from '../../components';

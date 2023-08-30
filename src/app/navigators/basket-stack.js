@@ -3,8 +3,8 @@ import {SafeAreaView, StyleSheet} from 'react-native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {BasketScreen} from '../screens';
 import {CardStyleInterpolators} from '@react-navigation/stack';
-
 import colors from '../utils/colors';
+
 const Stack = createNativeStackNavigator();
 
 const BasketStack = () => {

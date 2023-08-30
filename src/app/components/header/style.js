@@ -9,7 +9,7 @@ export default StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     paddingLeft: sizing.padding,
-    backgroundColor: colors.blue,
+    backgroundColor: colors.orange,
   },
   titleText: {
     fontWeight: '600',

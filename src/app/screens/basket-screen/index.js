@@ -1,5 +1,5 @@
-import React, {useEffect} from 'react';
-import {View, ActivityIndicator, FlatList} from 'react-native';
+import React from 'react';
+import {View, FlatList} from 'react-native';
 import styles from './style';
 import {Header, InfoProductCard, BottomCard, Text} from '../../components';
 import {useSelector} from 'react-redux';

@@ -28,7 +28,7 @@ export default StyleSheet.create({
   priceText: {
     fontSize: sizing.body,
     fontWeight: 'bold',
-    color: colors.blue,
+    color: colors.orange,
   },
   priceNumber: {
     fontSize: sizing.body,

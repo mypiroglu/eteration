@@ -12,6 +12,7 @@ import {useSelector} from 'react-redux';
 const Tab = createBottomTabNavigator();
 const MyTabs = () => {
   const {basket} = useSelector(state => state.basket);
+
   return (
     <Tab.Navigator
       initialRouteName="home-stack"
@@ -187,7 +188,7 @@ const style = StyleSheet.create({
     paddingTop: Platform.OS === 'ios' ? 20 : 15,
   },
   tabBar: {
-    backgroundColor: colors.blue,
+    backgroundColor: colors.orange,
     height: Platform.OS === 'ios' ? 100 : 70,
     alignItems: 'center',
     justifyContent: 'center',

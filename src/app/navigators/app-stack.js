@@ -1,13 +1,9 @@
 import React, {useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {
-  createStackNavigator,
-  CardStyleInterpolators,
-} from '@react-navigation/stack';
+import {createStackNavigator} from '@react-navigation/stack';
 import {ProductDetailScreen, SplashScreen} from '../screens';
 import MyTabs from './bottom-tab';
 import colors from '../utils/colors';
-import {StyleSheet} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import {addToBasketInitial} from '../redux/slice/basket-slice';
 import {addToFavoritesInitial} from '../redux/slice/favorites-slice';
@@ -31,11 +27,11 @@ const AppStack = () => {
             );
           });
         } else {
-          console.log('Veri bulunamadı.');
+          console.log('There is no data founded.');
         }
       })
       .catch(error => {
-        console.error('Veri getirilirken bir hata oluştu:', error);
+        console.error('Error', error);
       }),
     AsyncStorage.getItem('favorites')
       .then(res => {
@@ -46,11 +42,11 @@ const AppStack = () => {
             dispatch(addToFavoritesInitial(data));
           });
         } else {
-          console.log('Veri bulunamadı.');
+          console.log('There is no data founded.');
         }
       })
       .catch(error => {
-        console.error('Veri getirilirken bir hata oluştu:', error);
+        console.error('Error', error);
       }));
 
   const [isSplash, setIsSplash] = useState(true);
@@ -94,10 +90,5 @@ const AppStack = () => {
     </NavigationContainer>
   );
 };
-const style = StyleSheet.create({
-  root: {
-    flex: 1,
-    backgroundColor: colors.white,
-  },
-});
+
 export default AppStack;
